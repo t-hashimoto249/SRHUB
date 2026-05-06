@@ -1,0 +1,24 @@
+// 国名 → [lat, lng] のフォールバック lookup
+// レースの frontmatter で `coords: [lat, lng]` を指定すれば個別に上書き可能。
+// 値はその国でレースが行われている地域の代表点（厳密な国土中心ではない）。
+
+export const COUNTRY_COORDS: Record<string, [number, number]> = {
+  モロッコ: [31.0, -5.0],
+  コスタリカ: [9.5, -83.5],
+  ルーマニア: [45.5, 25.0],
+  ネパール: [28.0, 86.5],
+  モザンビーク: [-23.0, 35.0],
+  ボリビア: [-19.5, -67.5],
+  モンゴル: [47.5, 105.0],
+  オーストラリア: [-23.5, 133.5],
+  アメリカ合衆国: [36.5, -112.0],
+  日本: [36.0, 138.0],
+};
+
+export function resolveCoords(
+  country: string,
+  override?: [number, number] | null,
+): [number, number] | null {
+  if (override) return override;
+  return COUNTRY_COORDS[country] ?? null;
+}

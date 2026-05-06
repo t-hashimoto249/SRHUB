@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(npx *)",
+      "Bash(npm install *)",
+      "WebFetch(domain:www.marathondessables.com)",
+      "WebFetch(domain:thecoastalchallengecostarica.com)",
+      "WebFetch(domain:ultraraceromania.ro)",
+      "WebFetch(domain:www.everesttrailrace.com)",
+      "WebFetch(domain:trans-sahara-marathon.com)",
+      "WebFetch(domain:www.canal-aventure.com)",
+      "WebFetch(domain:mongoliatrailrun.com)",
+      "WebFetch(domain:g2gultra.com)",
+      "Bash(node /Users/tk-hashimoto/workspace/stageRaceFinder/verify-races.mjs)",
+      "Bash(npm run *)",
+      "Bash(curl -sf http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} /\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} /races\\\\n\" http://localhost:3000/races)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} /races/marathon-des-sables\\\\n\" http://localhost:3000/races/marathon-des-sables)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} /races/mongolia-trail-run\\\\n\" http://localhost:3000/races/mongolia-trail-run)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} /about\\\\n\" http://localhost:3000/about)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} /\\\\n\" http://localhost:3001/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} /races\\\\n\" http://localhost:3001/races)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} /races/marathon-des-sables\\\\n\" http://localhost:3001/races/marathon-des-sables)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} /races/mongolia-trail-run\\\\n\" http://localhost:3001/races/mongolia-trail-run)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} /about\\\\n\" http://localhost:3001/about)",
+      "Bash(curl -s http://localhost:3001/)",
+      "Bash(curl -s http://localhost:3001/races)",
+      "Bash(curl -sf http://localhost:3001/)"
+    ]
+  }
+}
