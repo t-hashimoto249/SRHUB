@@ -2,7 +2,7 @@
 
 import { useMemo, useRef, useState, useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
-import type { Race } from "@/types/content";
+import type { RaceListItem } from "@/types/content";
 import { MONTH_LABELS, type Palette, type DisplayFont } from "./design-tokens";
 import { CONTINENT_POLYGONS, type LngLat } from "./continent-polygons";
 import { resolveCoords } from "@/lib/country-coords";
@@ -62,7 +62,7 @@ const COUNTRY_LABELS: { name: string; lat: number; lng: number }[] = [
 interface CountryGroup {
   country: string;
   coords: [number, number];
-  races: Race[];
+  races: RaceListItem[];
 }
 
 interface HoverState extends CountryGroup {
@@ -76,7 +76,7 @@ export function WorldMap({
   displayFont,
   height = 460,
 }: {
-  races: Race[];
+  races: RaceListItem[];
   palette: Palette;
   displayFont: DisplayFont;
   height?: number;
@@ -84,6 +84,23 @@ export function WorldMap({
   const router = useRouter();
   const [hover, setHover] = useState<HoverState | null>(null);
   const wrapRef = useRef<HTMLDivElement | null>(null);
+  const hideTimerRef = useRef<number | null>(null);
+  const handleSelectRace = (slug: string) => router.push(`/races/${slug}`);
+
+  const clearHideTimer = () => {
+    if (hideTimerRef.current !== null) {
+      window.clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = null;
+    }
+  };
+
+  const scheduleHideHover = () => {
+    clearHideTimer();
+    hideTimerRef.current = window.setTimeout(() => {
+      setHover(null);
+      hideTimerRef.current = null;
+    }, 120);
+  };
 
   const byCountry = useMemo(() => {
     const m: Record<string, CountryGroup> = {};
@@ -247,6 +264,7 @@ export function WorldMap({
               key={group.country}
               style={{ cursor: "pointer" }}
               onMouseEnter={() => {
+                clearHideTimer();
                 if (!wrapRef.current) return;
                 const rect = wrapRef.current.getBoundingClientRect();
                 setHover({
@@ -257,10 +275,10 @@ export function WorldMap({
                   py: (y / H) * rect.height,
                 });
               }}
-              onMouseLeave={() => setHover(null)}
+              onMouseLeave={scheduleHideHover}
               onClick={() => {
                 if (group.races.length === 1) {
-                  router.push(`/races/${group.races[0].slug}`);
+                  handleSelectRace(group.races[0].slug);
                 }
               }}
             >
@@ -322,7 +340,17 @@ export function WorldMap({
         </div>
       ))}
 
-      {hover && <HoverCard hover={hover} palette={palette} displayFont={displayFont} containerRef={wrapRef} />}
+      {hover && (
+        <HoverCard
+          hover={hover}
+          palette={palette}
+          displayFont={displayFont}
+          containerRef={wrapRef}
+          onSelectRace={handleSelectRace}
+          onCardEnter={clearHideTimer}
+          onCardLeave={scheduleHideHover}
+        />
+      )}
     </div>
   );
 }
@@ -332,11 +360,17 @@ function HoverCard({
   palette,
   displayFont,
   containerRef,
+  onSelectRace,
+  onCardEnter,
+  onCardLeave,
 }: {
   hover: HoverState;
   palette: Palette;
   displayFont: DisplayFont;
   containerRef: React.RefObject<HTMLDivElement | null>;
+  onSelectRace?: (slug: string) => void;
+  onCardEnter?: () => void;
+  onCardLeave?: () => void;
 }) {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [pos, setPos] = useState({ left: hover.px + 16, top: hover.py - 10 });
@@ -359,6 +393,8 @@ function HoverCard({
   return (
     <div
       ref={cardRef}
+      onMouseEnter={onCardEnter}
+      onMouseLeave={onCardLeave}
       style={{
         position: "absolute",
         left: pos.left,
@@ -367,7 +403,7 @@ function HoverCard({
         background: palette.paper,
         border: `1px solid ${palette.ink}`,
         boxShadow: "0 12px 28px rgba(0,0,0,0.18)",
-        pointerEvents: "none",
+        pointerEvents: "auto",
         zIndex: 10,
       }}
     >
@@ -450,6 +486,7 @@ function HoverCard({
               {r0.summary}
             </div>
             <div
+              onClick={() => onSelectRace?.(r0.slug)}
               style={{
                 marginTop: 12,
                 fontFamily: displayFont.stack,
@@ -457,6 +494,7 @@ function HoverCard({
                 letterSpacing: "0.2em",
                 textTransform: "uppercase",
                 color: palette.accent,
+                cursor: "pointer",
               }}
             >
               Click to view ↗
@@ -478,8 +516,10 @@ function HoverCard({
               {hover.races.length} races in {hover.country}
             </div>
             {hover.races.map((r) => (
-              <div
+              <button
                 key={r.slug}
+                type="button"
+                onClick={() => onSelectRace?.(r.slug)}
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -487,6 +527,13 @@ function HoverCard({
                   padding: "8px 0",
                   borderTop: `1px solid ${palette.rule}`,
                   gap: 12,
+                  width: "100%",
+                  background: "transparent",
+                  borderLeft: "none",
+                  borderRight: "none",
+                  borderBottom: "none",
+                  textAlign: "left",
+                  cursor: "pointer",
                 }}
               >
                 <div style={{ minWidth: 0, flex: 1 }}>
@@ -515,7 +562,7 @@ function HoverCard({
                 >
                   {r.distance_km}km · {MONTH_LABELS[r.start_month]}
                 </div>
-              </div>
+              </button>
             ))}
           </>
         )}

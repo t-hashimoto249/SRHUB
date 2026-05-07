@@ -79,6 +79,9 @@ export interface Race extends Omit<RaceFrontmatter, "gear"> {
   contentHtml: string;
 }
 
+/** 一覧・地図など本文 HTML を含めない用途 */
+export type RaceListItem = Omit<Race, "contentHtml">;
+
 export type ReportPurpose = "completion" | "competitive" | "personal";
 
 export const REPORT_PURPOSE_LABEL: Record<ReportPurpose, string> = {

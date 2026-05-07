@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Palette, DisplayFont } from "./design-tokens";
-import { Mark } from "./Brand";
 
 interface SiteHeaderProps {
   palette: Palette;
@@ -26,7 +26,26 @@ export function SiteHeader({ palette, displayFont, current = "home", variant = "
       }}
     >
       <Link href="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
-        <Mark color={isB ? "#fff" : palette.ink} size={28} />
+        <span
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 34,
+            height: 34,
+            borderRadius: 10,
+            background: isB ? "rgba(255,255,255,0.92)" : "transparent",
+          }}
+        >
+          <Image
+            src="/images/logo.png"
+            alt="Stage Race"
+            width={28}
+            height={28}
+            priority
+            style={{ display: "block", objectFit: "contain" }}
+          />
+        </span>
         <div style={{ lineHeight: 1.1 }}>
           <div
             style={{

@@ -94,7 +94,7 @@ export function RaceDetailChapters({
         {section === "reports" && (
           <ReportPurposeTabs reports={reports} palette={palette} displayFont={displayFont} />
         )}
-        {section === "videos" && <ChapterVideos race={race} palette={palette} displayFont={displayFont} />}
+        {section === "videos" && <ChapterVideos race={race} palette={palette} />}
       </section>
     </>
   );
@@ -413,11 +413,9 @@ function ChapterEntry({
 function ChapterVideos({
   race,
   palette,
-  displayFont,
 }: {
   race: Race;
   palette: Palette;
-  displayFont: DisplayFont;
 }) {
   if (!race.videos?.length) return null;
   return (
