@@ -6,6 +6,7 @@ import type { RaceListItem } from "@/types/content";
 import { MONTH_LABELS, type Palette, type DisplayFont } from "./design-tokens";
 import { CONTINENT_POLYGONS, type LngLat } from "./continent-polygons";
 import { resolveCoords } from "@/lib/country-coords";
+import styles from "./WorldMap.module.css";
 
 const W = 1000;
 const H = 500;
@@ -361,6 +362,10 @@ export function WorldMap({
           onSelectRace={handleSelectRace}
           onCardEnter={clearHideTimer}
           onCardLeave={scheduleHideHover}
+          onClose={() => {
+            clearHideTimer();
+            setHover(null);
+          }}
         />
       )}
     </div>
@@ -375,6 +380,7 @@ function HoverCard({
   onSelectRace,
   onCardEnter,
   onCardLeave,
+  onClose,
 }: {
   hover: HoverState;
   palette: Palette;
@@ -383,6 +389,7 @@ function HoverCard({
   onSelectRace?: (slug: string) => void;
   onCardEnter?: () => void;
   onCardLeave?: () => void;
+  onClose?: () => void;
 }) {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [pos, setPos] = useState({ left: hover.px + 16, top: hover.py - 10 });
@@ -407,6 +414,7 @@ function HoverCard({
       ref={cardRef}
       onMouseEnter={onCardEnter}
       onMouseLeave={onCardLeave}
+      className={styles.hoverCard}
       style={{
         position: "absolute",
         left: pos.left,
@@ -419,6 +427,19 @@ function HoverCard({
         zIndex: 10,
       }}
     >
+      {onClose && (
+        <button
+          type="button"
+          aria-label="閉じる"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
+          className={styles.closeBtn}
+        >
+          ×
+        </button>
+      )}
       <div
         style={{
           height: 110,

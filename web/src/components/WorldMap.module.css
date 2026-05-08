@@ -1,0 +1,43 @@
+.hoverCard {
+  /* desktop styles come from inline `style` (calculated position) */
+}
+
+.closeBtn {
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .hoverCard {
+    /* override inline absolute positioning — anchor to viewport bottom */
+    position: fixed !important;
+    top: auto !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25) !important;
+    z-index: 50;
+  }
+  .closeBtn {
+    display: flex;
+  }
+}
