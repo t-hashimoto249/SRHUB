@@ -12,3 +12,68 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*
+ * Responsive tokens
+ *   --bp-md: 768px (tablet)
+ *   --bp-lg: 1024px (desktop)
+ * Mobile-first defaults; @media (min-width:...) overrides them.
+ */
+:root {
+  --page-x: 20px;
+  --section-y: 48px;
+  --section-y-lg: 56px;
+  --grid-gap: 16px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-x: 32px;
+    --section-y: 64px;
+    --section-y-lg: 80px;
+    --grid-gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --page-x: 48px;
+    --section-y: 80px;
+    --section-y-lg: 100px;
+    --grid-gap: 24px;
+  }
+}
+
+/* viewport visibility helpers */
+.only-mobile {
+  display: block;
+}
+.only-tablet-up {
+  display: none;
+}
+.only-desktop {
+  display: none;
+}
+@media (min-width: 768px) {
+  .only-mobile {
+    display: none;
+  }
+  .only-tablet-up {
+    display: block;
+  }
+}
+@media (min-width: 1024px) {
+  .only-desktop {
+    display: block;
+  }
+}
+
+/* lock body scroll when a mobile drawer/menu is open */
+body.no-scroll {
+  overflow: hidden;
+}

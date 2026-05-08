@@ -3,7 +3,7 @@ import { googleFontsHref, PALETTES, SELECTED_PALETTE_KEY } from "@/components/de
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Stage Race — World Edition",
+  title: "Stage Race Hub",
   description:
     "世界中のステージレース（複数日かけて走る長距離マラソン）を、日本人ウルトラランナーに届けるための紹介と参加レポート。",
 };

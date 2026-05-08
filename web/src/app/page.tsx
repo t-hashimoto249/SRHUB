@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllRaces } from "@/lib/content";
+import { getAllRaces, getAllReports, getAllContributors } from "@/lib/content";
 import {
   PALETTES,
   DISPLAY_FONTS,
@@ -10,44 +10,32 @@ import {
 } from "@/components/design-tokens";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import type { Race } from "@/types/content";
+import { REPORT_PURPOSE_LABEL, type Race, type Report, type Contributor } from "@/types/content";
+import styles from "./page.module.css";
 
 export default async function HomePage() {
-  const races = await getAllRaces();
+  const [races, reports, contributors] = await Promise.all([
+    getAllRaces(),
+    getAllReports(),
+    getAllContributors(),
+  ]);
   const palette = PALETTES[SELECTED_PALETTE_KEY];
   const displayFont = DISPLAY_FONTS[SELECTED_FONT_KEY];
   const featured = races.slice(0, 4);
+  const latestReports = reports.slice(0, 3);
+  const contributorMap = new Map(contributors.map((c) => [c.id, c]));
 
   return (
     <div style={{ background: palette.bg, color: palette.ink, fontFamily: '"Noto Sans JP", sans-serif' }}>
       <SiteHeader palette={palette} displayFont={displayFont} variant="A" current="home" />
 
-      <section style={{ padding: "80px 48px 48px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "end" }}>
+      <section className={styles.heroSection}>
+        <div className={styles.heroGrid}>
           <div>
-            <div
-              style={{
-                fontFamily: "ui-monospace, monospace",
-                fontSize: 10,
-                letterSpacing: "0.24em",
-                color: palette.inkSoft,
-                marginBottom: 24,
-                textTransform: "uppercase",
-              }}
-            >
+            <div className={styles.heroIssue} style={{ color: palette.inkSoft }}>
               Issue 01 / Spring 2026
             </div>
-            <h1
-              style={{
-                fontFamily: displayFont.stack,
-                fontSize: 132,
-                lineHeight: 0.86,
-                margin: 0,
-                fontWeight: 600,
-                letterSpacing: "-0.02em",
-                textTransform: "uppercase",
-              }}
-            >
+            <h1 className={styles.heroTitle} style={{ fontFamily: displayFont.stack }}>
               Several
               <br />
               <span style={{ color: palette.accent }}>Days</span>
@@ -55,19 +43,11 @@ export default async function HomePage() {
               On Foot.
             </h1>
           </div>
-          <div style={{ paddingBottom: 12 }}>
-            <p
-              style={{
-                fontFamily: '"Noto Serif JP", serif',
-                fontSize: 17,
-                lineHeight: 2,
-                color: palette.ink,
-                margin: 0,
-              }}
-            >
+          <div>
+            <p className={styles.heroIntro} style={{ color: palette.ink }}>
               一日では終わらない。数日かけて走り続ける。砂漠から極地まで、世界中で開催されているステージレースの中から、日本人ランナーが知るべきレースを集め、参加レポートと装備の知見を共有する場所です。
             </p>
-            <div style={{ marginTop: 32, display: "flex", gap: 24 }}>
+            <div className={styles.heroStats}>
               <StatCell label="Races covered" value={races.length} palette={palette} displayFont={displayFont} />
               <StatCell
                 label="Continents"
@@ -75,7 +55,7 @@ export default async function HomePage() {
                 palette={palette}
                 displayFont={displayFont}
               />
-              <StatCell label="Reports" value={0} palette={palette} displayFont={displayFont} />
+              <StatCell label="Reports" value={reports.length} palette={palette} displayFont={displayFont} />
             </div>
           </div>
         </div>
@@ -83,93 +63,30 @@ export default async function HomePage() {
 
       {featured.length > 0 && <FourSplitHero races={featured} palette={palette} displayFont={displayFont} />}
 
-      <section style={{ padding: "100px 48px" }}>
-        <div
-          style={{
-            borderTop: `1px solid ${palette.rule}`,
-            paddingTop: 32,
-            display: "grid",
-            gridTemplateColumns: "180px 1fr 1fr 1fr",
-            gap: 32,
-          }}
-        >
-          <div>
-            <div
-              style={{
-                fontFamily: displayFont.stack,
-                fontSize: 11,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: palette.inkSoft,
-                lineHeight: 1.6,
-              }}
-            >
-              From
-              <br />
-              The
-              <br />
-              Field
-            </div>
-          </div>
-          {[
-            {
-              tag: "Editorial",
-              title: "ステージレースとは何か—— 1日では終わらない走りの文化",
-              author: "編集部",
-              img: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80",
-            },
-            {
-              tag: "Guide",
-              title: "初めての海外ステージレース、装備選びのスタート地点",
-              author: "編集部",
-              img: "https://images.unsplash.com/photo-1547234935-80c7145ec969?w=800&q=80",
-            },
-            {
-              tag: "Interview",
-              title: "完走者に聞いた、サハラの夜に持っていきたいもの",
-              author: "編集部",
-              img: "https://images.unsplash.com/photo-1517783999520-f068d7431a60?w=800&q=80",
-            },
-          ].map((p) => (
-            <article key={p.title}>
-              <div
-                style={{
-                  aspectRatio: "4/3",
-                  backgroundImage: `url(${p.img})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  marginBottom: 14,
-                }}
-              />
-              <div
-                style={{
-                  fontFamily: displayFont.stack,
-                  fontSize: 10,
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: palette.accentDeep,
-                  marginBottom: 8,
-                }}
-              >
-                {p.tag}
+      {latestReports.length > 0 && (
+        <section className={styles.fieldSection}>
+          <div className={styles.fieldGrid} style={{ borderTop: `1px solid ${palette.rule}` }}>
+            <div>
+              <div className={styles.fieldLabel} style={{ fontFamily: displayFont.stack, color: palette.inkSoft }}>
+                From
+                <br />
+                The
+                <br />
+                Field
               </div>
-              <h3
-                style={{
-                  fontFamily: '"Noto Serif JP", serif',
-                  fontSize: 20,
-                  lineHeight: 1.4,
-                  margin: 0,
-                  color: palette.ink,
-                  fontWeight: 600,
-                }}
-              >
-                {p.title}
-              </h3>
-              <div style={{ marginTop: 12, fontSize: 12, color: palette.inkSoft }}>{p.author}</div>
-            </article>
-          ))}
-        </div>
-      </section>
+            </div>
+            {latestReports.map((r) => (
+              <ReportCard
+                key={r.slug}
+                report={r}
+                contributor={contributorMap.get(r.contributor)}
+                palette={palette}
+                displayFont={displayFont}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       <SiteFooter palette={palette} displayFont={displayFont} />
     </div>
@@ -190,12 +107,8 @@ function StatCell({
   return (
     <div>
       <div
-        style={{
-          fontFamily: displayFont.stack,
-          fontSize: 36,
-          fontWeight: 600,
-          color: palette.accentDeep,
-        }}
+        className={styles.statValue}
+        style={{ fontFamily: displayFont.stack, color: palette.accentDeep }}
       >
         {value}
       </div>
@@ -216,20 +129,9 @@ function FourSplitHero({
   displayFont: DisplayFont;
 }) {
   return (
-    <section style={{ padding: "0 48px" }}>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "2fr 1fr",
-          gridTemplateRows: "420px 240px",
-          gap: 12,
-          height: 672,
-        }}
-      >
-        <Link
-          href={`/races/${races[0].slug}`}
-          style={{ gridRow: "span 2", position: "relative", overflow: "hidden", textDecoration: "none" }}
-        >
+    <section className={styles.fourSplit}>
+      <div className={styles.fourSplitGrid}>
+        <Link href={`/races/${races[0].slug}`} className={styles.fourSplitMain}>
           <div
             style={{
               position: "absolute",
@@ -250,8 +152,8 @@ function FourSplitHero({
           <div
             style={{
               position: "absolute",
-              top: 20,
-              left: 24,
+              top: 16,
+              left: 18,
               fontFamily: "ui-monospace, monospace",
               fontSize: 10,
               color: "rgba(255,255,255,0.85)",
@@ -260,7 +162,7 @@ function FourSplitHero({
           >
             COVER · {races[0].country.toUpperCase()}
           </div>
-          <div style={{ position: "absolute", left: 24, right: 24, bottom: 28, color: "#fff" }}>
+          <div style={{ position: "absolute", left: 18, right: 18, bottom: 22, color: "#fff" }}>
             <div
               style={{
                 fontFamily: displayFont.stack,
@@ -273,30 +175,16 @@ function FourSplitHero({
             >
               {races[0].continent}
             </div>
-            <h2
-              style={{
-                fontFamily: displayFont.stack,
-                fontSize: 64,
-                fontWeight: 600,
-                margin: 0,
-                textTransform: "uppercase",
-                lineHeight: 0.95,
-                letterSpacing: "-0.01em",
-              }}
-            >
+            <h2 className={styles.fourSplitMainTitle} style={{ fontFamily: displayFont.stack }}>
               {races[0].title_en ?? races[0].title}
             </h2>
-            <p style={{ fontSize: 13, marginTop: 16, maxWidth: 480, lineHeight: 1.7, opacity: 0.92 }}>
+            <p style={{ fontSize: 13, marginTop: 14, maxWidth: 480, lineHeight: 1.7, opacity: 0.92 }}>
               {races[0].summary}
             </p>
           </div>
         </Link>
         {[races[1], races[2]].filter(Boolean).map((r) => (
-          <Link
-            key={r.slug}
-            href={`/races/${r.slug}`}
-            style={{ position: "relative", overflow: "hidden", textDecoration: "none" }}
-          >
+          <Link key={r.slug} href={`/races/${r.slug}`} className={styles.fourSplitSide}>
             <div
               style={{
                 position: "absolute",
@@ -314,7 +202,7 @@ function FourSplitHero({
                 background: "linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.75) 100%)",
               }}
             />
-            <div style={{ position: "absolute", left: 18, right: 18, bottom: 18, color: "#fff" }}>
+            <div style={{ position: "absolute", left: 16, right: 16, bottom: 16, color: "#fff" }}>
               <div
                 style={{
                   fontFamily: "ui-monospace, monospace",
@@ -342,5 +230,63 @@ function FourSplitHero({
         ))}
       </div>
     </section>
+  );
+}
+
+function ReportCard({
+  report,
+  contributor,
+  palette,
+  displayFont,
+}: {
+  report: Report;
+  contributor: Contributor | undefined;
+  palette: Palette;
+  displayFont: DisplayFont;
+}) {
+  const href = `/races/${report.race_slug}/reports/${report.slug}`;
+  const authorLabel = contributor?.name ?? `@${report.contributor}`;
+  return (
+    <Link href={href} style={{ textDecoration: "none", color: "inherit" }}>
+      <article>
+        <div
+          style={{
+            aspectRatio: "4/3",
+            backgroundImage: report.hero_image ? `url(${report.hero_image})` : undefined,
+            backgroundColor: report.hero_image ? undefined : palette.bgAlt,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            marginBottom: 14,
+          }}
+        />
+        <div
+          style={{
+            fontFamily: displayFont.stack,
+            fontSize: 10,
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
+            color: palette.accentDeep,
+            marginBottom: 8,
+          }}
+        >
+          {REPORT_PURPOSE_LABEL[report.purpose]}
+        </div>
+        <h3
+          style={{
+            fontFamily: '"Noto Serif JP", serif',
+            fontSize: 18,
+            lineHeight: 1.4,
+            margin: 0,
+            color: palette.ink,
+            fontWeight: 600,
+          }}
+        >
+          {report.title}
+        </h3>
+        <div style={{ marginTop: 12, fontSize: 12, color: palette.inkSoft }}>
+          {authorLabel} · {report.date}
+        </div>
+      </article>
+    </Link>
   );
 }

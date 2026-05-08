@@ -7,6 +7,7 @@ import {
 } from "@/components/design-tokens";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import styles from "../static-pages.module.css";
 
 export default async function AboutPage() {
   const contributors = await getAllContributors();
@@ -18,30 +19,11 @@ export default async function AboutPage() {
       <SiteHeader palette={palette} displayFont={displayFont} variant="A" current="about" />
 
       {/* Hero copy */}
-      <section style={{ padding: "120px 48px 80px", maxWidth: 1100 }}>
-        <div
-          style={{
-            fontFamily: "ui-monospace, monospace",
-            fontSize: 10,
-            letterSpacing: "0.24em",
-            color: palette.inkSoft,
-            marginBottom: 24,
-            textTransform: "uppercase",
-          }}
-        >
+      <section className={styles.heroSectionXL}>
+        <div className={styles.heroLabel} style={{ color: palette.inkSoft }}>
           About this site
         </div>
-        <h1
-          style={{
-            fontFamily: displayFont.stack,
-            fontSize: 96,
-            fontWeight: 600,
-            margin: 0,
-            lineHeight: 0.9,
-            textTransform: "uppercase",
-            letterSpacing: "-0.015em",
-          }}
-        >
+        <h1 className={styles.heroTitleXL} style={{ fontFamily: displayFont.stack }}>
           For those who
           <br />
           <span style={{ color: palette.accent }}>
@@ -53,16 +35,8 @@ export default async function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section style={{ padding: "0 48px 100px" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1.5fr",
-            gap: 80,
-            borderTop: `1px solid ${palette.rule}`,
-            paddingTop: 48,
-          }}
-        >
+      <section className={styles.section}>
+        <div className={styles.missionGrid} style={{ borderTop: `1px solid ${palette.rule}` }}>
           <div
             style={{
               fontFamily: displayFont.stack,
@@ -75,26 +49,10 @@ export default async function AboutPage() {
             Mission
           </div>
           <div>
-            <p
-              style={{
-                fontFamily: '"Noto Serif JP", serif',
-                fontSize: 22,
-                lineHeight: 1.85,
-                margin: 0,
-                color: palette.ink,
-              }}
-            >
+            <p className={styles.missionLead} style={{ color: palette.ink }}>
               ステージレースは、一晩では理解できない競技です。装備、エントリーの段取り、現地の気候、過去の参加者の声——必要な情報は分散しています。
             </p>
-            <p
-              style={{
-                fontFamily: '"Noto Serif JP", serif',
-                fontSize: 17,
-                lineHeight: 2,
-                marginTop: 24,
-                color: palette.inkSoft,
-              }}
-            >
+            <p className={styles.missionBody} style={{ color: palette.inkSoft }}>
               このサイトは、世界中のステージレースに関する一次情報を、日本語で集約することを目的としています。完走者のレポート、装備リスト、エントリーまでの実装的な道筋。走る人たちの記録に、実際に役立つ装備・販売店・主催者へのリンクを添えて届けます。
             </p>
           </div>
@@ -102,7 +60,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Principles */}
-      <section style={{ background: palette.bgAlt, padding: "100px 48px" }}>
+      <section className={styles.sectionWide} style={{ background: palette.bgAlt }}>
         <div
           style={{
             fontFamily: displayFont.stack,
@@ -115,7 +73,7 @@ export default async function AboutPage() {
         >
           Editorial Principles
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 48 }}>
+        <div className={styles.principlesGrid}>
           {[
             {
               n: "01",
@@ -133,32 +91,22 @@ export default async function AboutPage() {
               d: "装備メーカー・主催者・販売店へのリンクを積極的に掲載し、読者の装備選びとエントリー手続きを後押しします。アフィリエイトやスポンサー提携を含む場合でも、評価と紹介順序は実際に走ったランナーの判断を優先します。",
             },
           ].map((p) => (
-            <div key={p.n} style={{ borderTop: `2px solid ${palette.accent}`, paddingTop: 20 }}>
+            <div key={p.n} style={{ borderTop: `2px solid ${palette.accent}`, paddingTop: 18 }}>
               <div
                 style={{
                   fontFamily: "ui-monospace, monospace",
                   fontSize: 11,
                   letterSpacing: "0.18em",
                   color: palette.inkSoft,
-                  marginBottom: 16,
+                  marginBottom: 14,
                 }}
               >
                 {p.n}
               </div>
-              <h3
-                style={{
-                  fontFamily: displayFont.stack,
-                  fontSize: 26,
-                  fontWeight: 600,
-                  margin: 0,
-                  textTransform: "uppercase",
-                  letterSpacing: "-0.005em",
-                  lineHeight: 1.15,
-                }}
-              >
+              <h3 className={styles.principleTitle} style={{ fontFamily: displayFont.stack }}>
                 {p.t}
               </h3>
-              <p style={{ marginTop: 14, fontSize: 14, lineHeight: 1.85, color: palette.inkSoft }}>{p.d}</p>
+              <p style={{ marginTop: 12, fontSize: 14, lineHeight: 1.85, color: palette.inkSoft }}>{p.d}</p>
             </div>
           ))}
         </div>
@@ -166,27 +114,12 @@ export default async function AboutPage() {
 
       {/* Contributors */}
       {contributors.length > 0 && (
-        <section style={{ padding: "120px 48px" }}>
+        <section className={styles.sectionWideTall}>
           <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "baseline",
-              marginBottom: 48,
-              borderBottom: `1px solid ${palette.rule}`,
-              paddingBottom: 16,
-            }}
+            className={styles.contributorsHeader}
+            style={{ borderBottom: `1px solid ${palette.rule}` }}
           >
-            <h2
-              style={{
-                fontFamily: displayFont.stack,
-                fontSize: 56,
-                fontWeight: 600,
-                margin: 0,
-                textTransform: "uppercase",
-                letterSpacing: "-0.01em",
-              }}
-            >
+            <h2 className={styles.contributorsTitle} style={{ fontFamily: displayFont.stack }}>
               Contributors
             </h2>
             <div
@@ -200,22 +133,14 @@ export default async function AboutPage() {
               {contributors.length} runners
             </div>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 48 }}>
+          <div className={styles.contributorsGrid}>
             {contributors.map((c) => (
-              <article
-                key={c.id}
-                style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: 24, alignItems: "start" }}
-              >
+              <article key={c.id} className={styles.contributorCard}>
                 <div
+                  className={styles.contributorAvatar}
                   style={{
-                    width: 120,
-                    height: 120,
                     backgroundImage: c.avatar ? `url(${c.avatar})` : undefined,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    borderRadius: "50%",
                     background: c.avatar ? undefined : palette.bgAlt,
-                    filter: "grayscale(0.4)",
                   }}
                 />
                 <div>
@@ -231,7 +156,7 @@ export default async function AboutPage() {
                   >
                     @{c.id}
                   </div>
-                  <h3 style={{ fontFamily: displayFont.stack, fontSize: 28, fontWeight: 600, margin: 0, color: palette.ink }}>
+                  <h3 className={styles.contributorName} style={{ fontFamily: displayFont.stack, color: palette.ink }}>
                     {c.name}
                   </h3>
                   <p style={{ fontSize: 14, lineHeight: 1.8, color: palette.inkSoft, marginTop: 10 }}>{c.bio}</p>
@@ -243,16 +168,7 @@ export default async function AboutPage() {
       )}
 
       {/* Contribute CTA */}
-      <section
-        style={{
-          background: palette.ink,
-          color: palette.bg,
-          padding: "80px 48px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <section className={styles.cta} style={{ background: palette.ink, color: palette.bg }}>
         <div>
           <div
             style={{
@@ -266,29 +182,16 @@ export default async function AboutPage() {
           >
             Have you run one?
           </div>
-          <div
-            style={{
-              fontFamily: displayFont.stack,
-              fontSize: 48,
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "-0.01em",
-            }}
-          >
+          <div className={styles.ctaTitle} style={{ fontFamily: displayFont.stack }}>
             Share your report.
           </div>
         </div>
         <a
+          className={styles.ctaButton}
           style={{
-            padding: "16px 28px",
             border: `1px solid ${palette.bg}`,
             fontFamily: displayFont.stack,
-            fontWeight: 600,
-            fontSize: 13,
-            letterSpacing: "0.16em",
-            textTransform: "uppercase",
             color: palette.bg,
-            textDecoration: "none",
           }}
         >
           Contact Editorial →

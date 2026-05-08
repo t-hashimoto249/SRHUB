@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState, type ReactNode } from "react";
-import type { Continent, RaceListItem, Terrain } from "@/types/content";
+import type { Continent, RaceListItem, SupportType, Terrain } from "@/types/content";
 import type { DisplayFont, Palette } from "./design-tokens";
 import { MONTH_LABELS } from "./design-tokens";
 import { SiteHeader } from "./SiteHeader";
@@ -10,6 +10,7 @@ import { SiteFooter } from "./SiteFooter";
 import { TerrainIcon } from "./TerrainTags";
 import { Stars } from "./Brand";
 import { WorldMap } from "./WorldMap";
+import styles from "./RaceListExplorer.module.css";
 
 const CONTINENTS: (Continent | "すべて")[] = [
   "すべて",
@@ -23,6 +24,24 @@ const CONTINENTS: (Continent | "すべて")[] = [
 ];
 
 const TERRAIN_FILTERS: Terrain[] = ["砂漠", "山岳", "極地", "ジャングル", "その他"];
+
+type DistanceBin = "all" | "u150" | "u250" | "u350" | "o350";
+
+const DISTANCE_BINS: { key: DistanceBin; label: string; test: (km: number) => boolean }[] = [
+  { key: "all", label: "すべて", test: () => true },
+  { key: "u150", label: "〜150km", test: (km) => km < 150 },
+  { key: "u250", label: "150〜249km", test: (km) => km >= 150 && km < 250 },
+  { key: "u350", label: "250〜349km", test: (km) => km >= 250 && km < 350 },
+  { key: "o350", label: "350km+", test: (km) => km >= 350 },
+];
+
+const SUPPORT_FILTERS: { key: SupportType | "all"; label: string }[] = [
+  { key: "all", label: "すべて" },
+  { key: "self", label: "セルフサポート" },
+  { key: "full", label: "フルサポート" },
+];
+
+const MONTHS: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 type CardStyle = "overlay" | "split" | "minimal";
 
@@ -371,51 +390,48 @@ export function RaceListExplorer({
   const [continent, setContinent] = useState<(typeof CONTINENTS)[number]>("すべて");
   const [difficulty, setDifficulty] = useState(0);
   const [terrains, setTerrains] = useState<Terrain[]>([]);
+  const [distance, setDistance] = useState<DistanceBin>("all");
+  const [months, setMonths] = useState<number[]>([]);
+  const [support, setSupport] = useState<SupportType | "all">("all");
+  const [filterOpen, setFilterOpen] = useState(false);
+
+  const activeFilterCount =
+    (continent !== "すべて" ? 1 : 0) +
+    (difficulty ? 1 : 0) +
+    (terrains.length ? 1 : 0) +
+    (distance !== "all" ? 1 : 0) +
+    (months.length ? 1 : 0) +
+    (support !== "all" ? 1 : 0);
 
   const filtered = useMemo(() => {
+    const distanceTest = DISTANCE_BINS.find((b) => b.key === distance)!.test;
     const out = races.filter((r) => {
       if (continent !== "すべて" && r.continent !== continent) return false;
       if (difficulty && r.difficulty < difficulty) return false;
       if (terrains.length && !terrains.some((t) => r.terrain.includes(t))) return false;
+      if (!distanceTest(r.distance_km)) return false;
+      if (months.length && !months.includes(r.start_month)) return false;
+      if (support !== "all" && r.support !== support) return false;
       return true;
     });
     return out.sort((a, b) => b.difficulty - a.difficulty);
-  }, [races, continent, difficulty, terrains]);
+  }, [races, continent, difficulty, terrains, distance, months, support]);
 
   return (
     <div style={{ background: palette.bg, color: palette.ink, fontFamily: '"Noto Sans JP", sans-serif' }}>
       <SiteHeader palette={palette} displayFont={displayFont} variant="A" current="races" />
 
-      <section style={{ padding: "64px 48px 24px" }}>
-        <div
-          style={{
-            fontFamily: "ui-monospace, monospace",
-            fontSize: 10,
-            letterSpacing: "0.24em",
-            color: palette.inkSoft,
-            marginBottom: 16,
-            textTransform: "uppercase",
-          }}
-        >
+      <section className={styles.heroSection}>
+        <div className={styles.heroLabel} style={{ color: palette.inkSoft }}>
           Index · {filtered.length} of {races.length} races
         </div>
-        <h1
-          style={{
-            fontFamily: displayFont.stack,
-            fontSize: 92,
-            fontWeight: 600,
-            margin: 0,
-            lineHeight: 0.9,
-            textTransform: "uppercase",
-            letterSpacing: "-0.01em",
-          }}
-        >
+        <h1 className={styles.heroTitle} style={{ fontFamily: displayFont.stack }}>
           All Races
         </h1>
       </section>
 
-      <section style={{ padding: "0 48px 48px" }}>
-        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 16 }}>
+      <section className={styles.mapSection}>
+        <div className={styles.mapHeader}>
           <div>
             <div
               style={{
@@ -428,16 +444,7 @@ export function RaceListExplorer({
             >
               02 · Atlas
             </div>
-            <h2
-              style={{
-                fontFamily: displayFont.stack,
-                fontSize: 28,
-                fontWeight: 600,
-                margin: "8px 0 0",
-                textTransform: "uppercase",
-                letterSpacing: "0.02em",
-              }}
-            >
+            <h2 className={styles.mapTitle} style={{ fontFamily: displayFont.stack }}>
               世界のレースを地図で探す
             </h2>
           </div>
@@ -448,16 +455,30 @@ export function RaceListExplorer({
         <WorldMap races={filtered} palette={palette} displayFont={displayFont} height={500} />
       </section>
 
-      <section style={{ padding: "0 48px 80px", display: "grid", gridTemplateColumns: "240px 1fr", gap: 48 }}>
-        <aside
-          style={{
-            position: "sticky",
-            top: 24,
-            alignSelf: "start",
-            borderTop: `1px solid ${palette.rule}`,
-            paddingTop: 20,
-          }}
-        >
+      <section className={styles.body}>
+        <aside>
+          <button
+            type="button"
+            className={styles.filterToggle}
+            onClick={() => setFilterOpen((v) => !v)}
+            style={{
+              border: `1px solid ${palette.rule}`,
+              color: palette.ink,
+              fontFamily: displayFont.stack,
+            }}
+          >
+            <span>
+              Filter{activeFilterCount > 0 ? ` · ${activeFilterCount}` : ""}
+            </span>
+            <span style={{ fontSize: 16 }}>{filterOpen ? "−" : "+"}</span>
+          </button>
+          <div
+            className={`${filterOpen ? "" : styles.filterPanelClosed}`}
+          >
+            <div
+              className={styles.filterPanelInner}
+              style={{ borderTop: `1px solid ${palette.rule}` }}
+            >
           <FilterGroup label="Continent" palette={palette} displayFont={displayFont}>
             {CONTINENTS.map((c) => (
               <FilterChip
@@ -465,6 +486,32 @@ export function RaceListExplorer({
                 label={c}
                 active={continent === c}
                 onClick={() => setContinent(c)}
+                palette={palette}
+                displayFont={displayFont}
+              />
+            ))}
+          </FilterGroup>
+          <FilterGroup label="Distance" palette={palette} displayFont={displayFont}>
+            {DISTANCE_BINS.map((b) => (
+              <FilterChip
+                key={b.key}
+                label={b.label}
+                active={distance === b.key}
+                onClick={() => setDistance(b.key)}
+                palette={palette}
+                displayFont={displayFont}
+              />
+            ))}
+          </FilterGroup>
+          <FilterGroup label="Month" palette={palette} displayFont={displayFont}>
+            {MONTHS.map((m) => (
+              <FilterChip
+                key={m}
+                label={MONTH_LABELS[m]}
+                active={months.includes(m)}
+                onClick={() =>
+                  setMonths((s) => (s.includes(m) ? s.filter((x) => x !== m) : [...s, m]))
+                }
                 palette={palette}
                 displayFont={displayFont}
               />
@@ -508,9 +555,23 @@ export function RaceListExplorer({
               ))}
             </div>
           </FilterGroup>
+          <FilterGroup label="Support" palette={palette} displayFont={displayFont}>
+            {SUPPORT_FILTERS.map((s) => (
+              <FilterChip
+                key={s.key}
+                label={s.label}
+                active={support === s.key}
+                onClick={() => setSupport(s.key)}
+                palette={palette}
+                displayFont={displayFont}
+              />
+            ))}
+          </FilterGroup>
+            </div>
+          </div>
         </aside>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24 }}>
+        <div className={styles.raceGrid}>
           {filtered.map((r, i) => (
             <RaceCard
               key={r.slug}
@@ -524,8 +585,8 @@ export function RaceListExplorer({
           {!filtered.length && (
             <div
               style={{
-                gridColumn: "span 2",
-                padding: "80px 0",
+                gridColumn: "1 / -1",
+                padding: "60px 0",
                 textAlign: "center",
                 color: palette.inkSoft,
                 fontSize: 14,

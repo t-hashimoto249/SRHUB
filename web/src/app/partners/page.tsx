@@ -9,6 +9,7 @@ import {
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import type { Partner, PartnerCategory } from "@/types/content";
+import styles from "../static-pages.module.css";
 
 const CATEGORY_ORDER: PartnerCategory[] = [
   "装備",
@@ -37,44 +38,16 @@ export default async function PartnersPage() {
       <SiteHeader palette={palette} displayFont={displayFont} variant="A" current="partners" />
 
       {/* Hero */}
-      <section style={{ padding: "96px 48px 48px", maxWidth: 1100 }}>
-        <div
-          style={{
-            fontFamily: "ui-monospace, monospace",
-            fontSize: 10,
-            letterSpacing: "0.24em",
-            color: palette.inkSoft,
-            marginBottom: 20,
-            textTransform: "uppercase",
-          }}
-        >
+      <section className={styles.heroSection}>
+        <div className={styles.heroLabel} style={{ color: palette.inkSoft }}>
           Partners
         </div>
-        <h1
-          style={{
-            fontFamily: displayFont.stack,
-            fontSize: 80,
-            fontWeight: 600,
-            margin: 0,
-            lineHeight: 0.92,
-            textTransform: "uppercase",
-            letterSpacing: "-0.015em",
-          }}
-        >
+        <h1 className={styles.heroTitleLg} style={{ fontFamily: displayFont.stack }}>
           The gear, the
           <br />
           <span style={{ color: palette.accent }}>people, the path.</span>
         </h1>
-        <p
-          style={{
-            fontFamily: '"Noto Serif JP", serif',
-            fontSize: 18,
-            lineHeight: 1.95,
-            color: palette.inkSoft,
-            marginTop: 28,
-            maxWidth: 760,
-          }}
-        >
+        <p className={styles.heroLead} style={{ color: palette.inkSoft }}>
           ステージレースを走るとき、頼れるのは過去に走った人と、それを支えた装備・主催者・販売店です。このページではサイトが信頼してリンクしているパートナーをまとめています。
         </p>
         <div
@@ -99,9 +72,9 @@ export default async function PartnersPage() {
 
       {/* Featured */}
       {featured.length > 0 && (
-        <section style={{ padding: "0 48px 64px", maxWidth: 1100 }}>
+        <section className={styles.section}>
           <SectionHeading n="Featured" palette={palette} displayFont={displayFont} />
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(360px, 1fr))", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 16 }}>
             {featured.map((p) => (
               <PartnerCard key={p.id} partner={p} palette={palette} displayFont={displayFont} large />
             ))}
@@ -113,9 +86,9 @@ export default async function PartnersPage() {
       {[...grouped.entries()]
         .filter(([, list]) => list.length > 0)
         .map(([cat, list]) => (
-          <section key={cat} style={{ padding: "0 48px 64px", maxWidth: 1100 }}>
+          <section key={cat} className={styles.section}>
             <SectionHeading n={cat} palette={palette} displayFont={displayFont} />
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: 16 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 14 }}>
               {list.map((p) => (
                 <PartnerCard key={p.id} partner={p} palette={palette} displayFont={displayFont} />
               ))}
@@ -124,10 +97,10 @@ export default async function PartnersPage() {
         ))}
 
       {partners.length === 0 && (
-        <section style={{ padding: "0 48px 120px", maxWidth: 1100 }}>
+        <section className={styles.section}>
           <div
             style={{
-              padding: "60px 24px",
+              padding: "48px 20px",
               textAlign: "center",
               border: `1px dashed ${palette.rule}`,
               color: palette.inkSoft,
@@ -143,16 +116,7 @@ export default async function PartnersPage() {
       )}
 
       {/* CTA */}
-      <section
-        style={{
-          background: palette.ink,
-          color: palette.bg,
-          padding: "60px 48px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <section className={styles.cta} style={{ background: palette.ink, color: palette.bg }}>
         <div>
           <div
             style={{
@@ -166,30 +130,17 @@ export default async function PartnersPage() {
           >
             Want to partner with us?
           </div>
-          <div
-            style={{
-              fontFamily: displayFont.stack,
-              fontSize: 32,
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "-0.005em",
-            }}
-          >
+          <div className={styles.ctaTitleSm} style={{ fontFamily: displayFont.stack }}>
             Contact editorial.
           </div>
         </div>
         <Link
           href="/about"
+          className={styles.ctaButton}
           style={{
-            padding: "14px 24px",
             border: `1px solid ${palette.bg}`,
             fontFamily: displayFont.stack,
-            fontWeight: 600,
-            fontSize: 13,
-            letterSpacing: "0.16em",
-            textTransform: "uppercase",
             color: palette.bg,
-            textDecoration: "none",
           }}
         >
           About →
@@ -217,14 +168,14 @@ function SectionHeading({
         alignItems: "baseline",
         gap: 16,
         borderBottom: `1px solid ${palette.rule}`,
-        paddingBottom: 14,
-        marginBottom: 28,
+        paddingBottom: 12,
+        marginBottom: 22,
       }}
     >
       <h2
         style={{
           fontFamily: displayFont.stack,
-          fontSize: 28,
+          fontSize: "clamp(20px, 5vw, 28px)",
           fontWeight: 600,
           margin: 0,
           textTransform: "uppercase",
@@ -256,8 +207,8 @@ function PartnerCard({
       style={{
         display: "flex",
         flexDirection: "column",
-        gap: 16,
-        padding: large ? 28 : 22,
+        gap: 14,
+        padding: large ? 24 : 20,
         border: `1px solid ${palette.rule}`,
         background: large ? palette.paper : "transparent",
         color: palette.ink,
@@ -293,24 +244,24 @@ function PartnerCard({
           </span>
         )}
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
         {partner.logo && (
           <div
             style={{
-              width: 56,
-              height: 56,
+              width: 48,
+              height: 48,
               backgroundImage: `url(${partner.logo})`,
               backgroundSize: "contain",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
-              flex: "0 0 56px",
+              flex: "0 0 48px",
             }}
           />
         )}
         <h3
           style={{
             fontFamily: displayFont.stack,
-            fontSize: large ? 28 : 22,
+            fontSize: large ? "clamp(20px, 4vw, 28px)" : "clamp(18px, 3.5vw, 22px)",
             fontWeight: 600,
             margin: 0,
             color: palette.ink,

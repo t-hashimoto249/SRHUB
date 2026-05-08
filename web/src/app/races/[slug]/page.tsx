@@ -11,6 +11,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RaceMeta } from "@/components/RaceMeta";
 import { RaceDetailChapters } from "@/components/RaceDetailChapters";
+import styles from "./page.module.css";
 
 export async function generateStaticParams() {
   const races = await getAllRaces();
@@ -33,7 +34,7 @@ export default async function RaceDetailPage({ params }: RaceDetailPageProps) {
   return (
     <div style={{ background: palette.bg, color: palette.ink, fontFamily: '"Noto Sans JP", sans-serif' }}>
       {/* フルブリードヒーロー */}
-      <section style={{ position: "relative", height: 640, overflow: "hidden" }}>
+      <section className={styles.hero}>
         <div
           style={{
             position: "absolute",
@@ -54,40 +55,21 @@ export default async function RaceDetailPage({ params }: RaceDetailPageProps) {
           }}
         />
         <SiteHeader palette={palette} displayFont={displayFont} variant="B" current="races" />
-        <div style={{ position: "absolute", left: 48, right: 48, bottom: 48, color: "#fff" }}>
-          <div
-            style={{
-              fontFamily: "ui-monospace, monospace",
-              fontSize: 11,
-              letterSpacing: "0.24em",
-              textTransform: "uppercase",
-              marginBottom: 16,
-              opacity: 0.85,
-            }}
-          >
+        <div className={styles.heroContent}>
+          <div className={styles.heroLabel}>
             {race.continent} · {race.country} · {MONTH_LABELS[race.start_month]} {race.duration_days}d
           </div>
-          <h1
-            style={{
-              fontFamily: displayFont.stack,
-              fontSize: 124,
-              fontWeight: 600,
-              margin: 0,
-              lineHeight: 0.88,
-              textTransform: "uppercase",
-              letterSpacing: "-0.015em",
-            }}
-          >
+          <h1 className={styles.heroTitle} style={{ fontFamily: displayFont.stack }}>
             {race.title_en ?? race.title}
           </h1>
-          <div style={{ marginTop: 16, fontSize: 17, fontFamily: '"Noto Serif JP", serif', opacity: 0.95 }}>
+          <div className={styles.heroSub} style={{ fontFamily: '"Noto Serif JP", serif' }}>
             {race.title}
           </div>
         </div>
       </section>
 
       {/* メタバー */}
-      <section style={{ padding: "0 48px", marginTop: -1, background: palette.paper }}>
+      <section className={styles.metaSection} style={{ background: palette.paper }}>
         <RaceMeta race={race} palette={palette} displayFont={displayFont} layout="row" />
       </section>
 
@@ -96,14 +78,8 @@ export default async function RaceDetailPage({ params }: RaceDetailPageProps) {
 
       {/* CTA */}
       <section
-        style={{
-          background: palette.accentDeep,
-          color: palette.bg,
-          padding: "80px 48px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
+        className={styles.cta}
+        style={{ background: palette.accentDeep, color: palette.bg }}
       >
         <div>
           <div
@@ -119,13 +95,8 @@ export default async function RaceDetailPage({ params }: RaceDetailPageProps) {
             Official site
           </div>
           <div
-            style={{
-              fontFamily: displayFont.stack,
-              fontSize: 36,
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "-0.005em",
-            }}
+            className={styles.ctaTitle}
+            style={{ fontFamily: displayFont.stack }}
           >
             Apply for {race.title_en ?? race.title}
           </div>
@@ -134,17 +105,8 @@ export default async function RaceDetailPage({ params }: RaceDetailPageProps) {
           href={race.official_url}
           target="_blank"
           rel="noopener noreferrer"
-          style={{
-            padding: "18px 32px",
-            background: palette.bg,
-            color: palette.ink,
-            fontFamily: displayFont.stack,
-            fontWeight: 600,
-            fontSize: 14,
-            letterSpacing: "0.16em",
-            textTransform: "uppercase",
-            textDecoration: "none",
-          }}
+          className={styles.ctaButton}
+          style={{ background: palette.bg, color: palette.ink, fontFamily: displayFont.stack }}
         >
           Visit Site →
         </a>

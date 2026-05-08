@@ -1,0 +1,58 @@
+.footer {
+  padding: 32px var(--page-x) 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: 40px var(--page-x) 28px;
+    gap: 32px;
+  }
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+@media (min-width: 768px) {
+  .cols {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cols {
+    grid-template-columns: 1.3fr 1fr 1fr 1fr;
+  }
+}
+
+.brandLead {
+  /* on tablet 2-col, the lead column spans both for breathing room */
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .brandLead {
+    grid-column: 1 / -1;
+  }
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 11px;
+  padding-top: 20px;
+}
+
+@media (min-width: 768px) {
+  .bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+  }
+}

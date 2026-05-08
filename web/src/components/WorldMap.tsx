@@ -120,7 +120,8 @@ export function WorldMap({
       style={{
         position: "relative",
         width: "100%",
-        height,
+        aspectRatio: `${W} / ${H}`,
+        maxHeight: height,
         background: palette.bg,
         border: `1px solid ${palette.rule}`,
         overflow: "hidden",
@@ -279,7 +280,18 @@ export function WorldMap({
               onClick={() => {
                 if (group.races.length === 1) {
                   handleSelectRace(group.races[0].slug);
+                  return;
                 }
+                clearHideTimer();
+                if (!wrapRef.current) return;
+                const rect = wrapRef.current.getBoundingClientRect();
+                setHover({
+                  country: group.country,
+                  coords: group.coords,
+                  races: group.races,
+                  px: (x / W) * rect.width,
+                  py: (y / H) * rect.height,
+                });
               }}
             >
               <circle cx={x} cy={y} r={isHovered ? 24 : 16} fill="url(#pinGlow)" />

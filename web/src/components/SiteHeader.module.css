@@ -1,0 +1,143 @@
+.header {
+  position: relative;
+  z-index: 10;
+  padding: 14px var(--page-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 16px var(--page-x);
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .brand {
+    gap: 12px;
+  }
+}
+
+.logoBox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.brandTitle {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 15px;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .brandTitle {
+    font-size: 17px;
+  }
+}
+
+.brandSub {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+@media (min-width: 768px) {
+  .brandSub {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+}
+
+.navDesktop {
+  display: none;
+  gap: 28px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .navDesktop {
+    display: flex;
+  }
+}
+
+.navLink {
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.hamburger {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: inherit;
+}
+
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  padding: 80px var(--page-x) 40px;
+  overflow-y: auto;
+}
+
+.drawerNav {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-top: 24px;
+}
+
+.drawerLink {
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1;
+}

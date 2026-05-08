@@ -1,0 +1,158 @@
+.heroSection {
+  padding: 40px var(--page-x) 16px;
+}
+
+@media (min-width: 768px) {
+  .heroSection {
+    padding: 56px var(--page-x) 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroSection {
+    padding: 64px var(--page-x) 24px;
+  }
+}
+
+.heroLabel {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .heroLabel {
+    margin-bottom: 16px;
+  }
+}
+
+.heroTitle {
+  margin: 0;
+  font-size: clamp(48px, 12vw, 92px);
+  font-weight: 600;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.mapSection {
+  padding: 0 var(--page-x) 32px;
+}
+
+@media (min-width: 768px) {
+  .mapSection {
+    padding: 0 var(--page-x) 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mapSection {
+    padding: 0 var(--page-x) 48px;
+  }
+}
+
+.mapHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .mapHeader {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+}
+
+.mapTitle {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 8px 0 0;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+@media (min-width: 768px) {
+  .mapTitle {
+    font-size: 28px;
+  }
+}
+
+.body {
+  padding: 0 var(--page-x) 56px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 1024px) {
+  .body {
+    grid-template-columns: 240px 1fr;
+    gap: 48px;
+    padding-bottom: 80px;
+  }
+}
+
+.filterToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 1024px) {
+  .filterToggle {
+    display: none;
+  }
+}
+
+.filterPanel {
+  /* mobile/tablet: collapsible content */
+}
+
+.filterPanelClosed {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .filterPanelClosed {
+    display: block;
+  }
+}
+
+.filterPanelInner {
+  padding-top: 8px;
+}
+
+@media (min-width: 1024px) {
+  .filterPanelInner {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    padding-top: 20px;
+  }
+}
+
+.raceGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+@media (min-width: 768px) {
+  .raceGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}

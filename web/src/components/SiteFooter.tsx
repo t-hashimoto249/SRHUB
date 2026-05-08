@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mark } from "./Brand";
 import type { Palette, DisplayFont } from "./design-tokens";
+import styles from "./SiteFooter.module.css";
 
 interface FooterItem {
   label: string;
@@ -11,18 +12,15 @@ interface FooterItem {
 export function SiteFooter({ palette, displayFont }: { palette: Palette; displayFont: DisplayFont }) {
   return (
     <footer
+      className={styles.footer}
       style={{
         borderTop: `1px solid ${palette.rule}`,
         background: palette.bgAlt,
         color: palette.ink,
-        padding: "40px 32px 28px",
-        display: "flex",
-        flexDirection: "column",
-        gap: 32,
       }}
     >
-      <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr 1fr 1fr", gap: 32 }}>
-        <div>
+      <div className={styles.cols}>
+        <div className={styles.brandLead}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
             <Mark color={palette.ink} size={26} />
             <div
@@ -37,7 +35,7 @@ export function SiteFooter({ palette, displayFont }: { palette: Palette; display
               Stage Race
             </div>
           </div>
-          <p style={{ fontSize: 12, lineHeight: 1.7, color: palette.inkSoft, maxWidth: 280 }}>
+          <p style={{ fontSize: 12, lineHeight: 1.7, color: palette.inkSoft, maxWidth: 320 }}>
             世界中のステージレースを、日本人ウルトラランナーに届ける記録庫。レポートと装備の情報、参加までの道筋を扱います。
           </p>
         </div>
@@ -97,14 +95,8 @@ export function SiteFooter({ palette, displayFont }: { palette: Palette; display
         ))}
       </div>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          fontSize: 11,
-          color: palette.inkSoft,
-          paddingTop: 20,
-          borderTop: `1px solid ${palette.rule}`,
-        }}
+        className={styles.bottom}
+        style={{ color: palette.inkSoft, borderTop: `1px solid ${palette.rule}` }}
       >
         <span>© 2026 Stage Race Archive</span>
         <span style={{ fontFamily: displayFont.stack, letterSpacing: "0.18em", textTransform: "uppercase" }}>

@@ -1,0 +1,389 @@
+/* shared styles for About / Partners / Disclosure pages */
+
+.heroSection {
+  padding: 56px var(--page-x) 32px;
+  max-width: 1100px;
+}
+
+@media (min-width: 768px) {
+  .heroSection {
+    padding: 80px var(--page-x) 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroSection {
+    padding: 96px var(--page-x) 48px;
+  }
+}
+
+.heroSectionXL {
+  padding: 64px var(--page-x) 40px;
+  max-width: 1100px;
+}
+
+@media (min-width: 768px) {
+  .heroSectionXL {
+    padding: 96px var(--page-x) 56px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroSectionXL {
+    padding: 120px var(--page-x) 80px;
+  }
+}
+
+.heroLabel {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .heroLabel {
+    margin-bottom: 20px;
+    letter-spacing: 0.24em;
+  }
+}
+
+.heroTitleXL {
+  margin: 0;
+  font-size: clamp(44px, 11vw, 96px);
+  font-weight: 600;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+}
+
+.heroTitleLg {
+  margin: 0;
+  font-size: clamp(36px, 9vw, 80px);
+  font-weight: 600;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+}
+
+.heroTitleMd {
+  margin: 0;
+  font-size: clamp(32px, 8vw, 64px);
+  font-weight: 600;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+}
+
+.heroLead {
+  font-family: "Noto Serif JP", serif;
+  font-size: 15px;
+  line-height: 1.85;
+  margin: 0;
+  margin-top: 22px;
+  max-width: 760px;
+}
+
+@media (min-width: 768px) {
+  .heroLead {
+    font-size: 18px;
+    line-height: 1.95;
+    margin-top: 28px;
+  }
+}
+
+.section {
+  padding: 0 var(--page-x) 56px;
+  max-width: 1100px;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 0 var(--page-x) 80px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 0 var(--page-x) 100px;
+  }
+}
+
+.sectionWide {
+  padding: 56px var(--page-x);
+}
+
+@media (min-width: 768px) {
+  .sectionWide {
+    padding: 80px var(--page-x);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sectionWide {
+    padding: 100px var(--page-x);
+  }
+}
+
+.sectionWideTall {
+  padding: 56px var(--page-x);
+}
+
+@media (min-width: 768px) {
+  .sectionWideTall {
+    padding: 88px var(--page-x);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sectionWideTall {
+    padding: 120px var(--page-x);
+  }
+}
+
+.cta {
+  padding: 48px var(--page-x);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .cta {
+    padding: 64px var(--page-x);
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cta {
+    padding: 80px var(--page-x);
+  }
+}
+
+.ctaTitle {
+  font-size: clamp(24px, 5.5vw, 48px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 1.1;
+}
+
+.ctaTitleSm {
+  font-size: clamp(22px, 4.5vw, 32px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 1.15;
+}
+
+.ctaButton {
+  padding: 14px 22px;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .ctaButton {
+    padding: 16px 28px;
+    font-size: 13px;
+  }
+}
+
+/* about: mission */
+.missionGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding-top: 28px;
+}
+
+@media (min-width: 768px) {
+  .missionGrid {
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    padding-top: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .missionGrid {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    padding-top: 48px;
+  }
+}
+
+.missionLead {
+  font-family: "Noto Serif JP", serif;
+  font-size: 18px;
+  line-height: 1.85;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .missionLead {
+    font-size: 22px;
+  }
+}
+
+.missionBody {
+  font-family: "Noto Serif JP", serif;
+  font-size: 15px;
+  line-height: 1.95;
+  margin-top: 16px;
+}
+
+@media (min-width: 768px) {
+  .missionBody {
+    font-size: 17px;
+    line-height: 2;
+    margin-top: 24px;
+  }
+}
+
+/* about: principles */
+.principlesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .principlesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .principlesGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+}
+
+.principleTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .principleTitle {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .principleTitle {
+    font-size: 26px;
+  }
+}
+
+/* about: contributors */
+.contributorsHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+}
+
+@media (min-width: 768px) {
+  .contributorsHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 40px;
+    padding-bottom: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contributorsHeader {
+    margin-bottom: 48px;
+  }
+}
+
+.contributorsTitle {
+  font-size: clamp(36px, 8vw, 56px);
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+
+.contributorsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .contributorsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contributorsGrid {
+    gap: 48px;
+  }
+}
+
+.contributorCard {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .contributorCard {
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+  }
+}
+
+.contributorAvatar {
+  width: 80px;
+  height: 80px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  filter: grayscale(0.4);
+}
+
+@media (min-width: 768px) {
+  .contributorAvatar {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.contributorName {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .contributorName {
+    font-size: 28px;
+  }
+}

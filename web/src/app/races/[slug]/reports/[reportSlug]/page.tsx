@@ -22,6 +22,7 @@ import { ReportCard } from "@/components/ReportCard";
 import { AttachmentList } from "@/components/AttachmentList";
 import { Gallery } from "@/components/Gallery";
 import type { Contact, ContactMethod } from "@/types/content";
+import styles from "./page.module.css";
 
 export async function generateStaticParams() {
   const reports = await getAllReports();
@@ -67,21 +68,8 @@ export default async function ReportDetailPage({ params }: PageProps) {
       <SiteHeader palette={palette} displayFont={displayFont} variant="A" current="races" />
 
       {/* タイトルブロック */}
-      <section style={{ padding: "64px 48px 48px", maxWidth: 1100 }}>
-        {/* breadcrumb */}
-        <div
-          style={{
-            display: "flex",
-            gap: 8,
-            alignItems: "center",
-            fontFamily: "ui-monospace, monospace",
-            fontSize: 11,
-            letterSpacing: "0.16em",
-            color: palette.inkSoft,
-            textTransform: "uppercase",
-            marginBottom: 24,
-          }}
-        >
+      <section className={styles.titleSection}>
+        <div className={styles.breadcrumb} style={{ color: palette.inkSoft }}>
           <Link href="/races" style={{ color: palette.inkSoft, textDecoration: "none" }}>
             Races
           </Link>
@@ -93,39 +81,15 @@ export default async function ReportDetailPage({ params }: PageProps) {
           <span style={{ color: palette.ink }}>Report</span>
         </div>
 
-        {/* purpose badge */}
         <div style={{ marginBottom: 20 }}>
           <PurposeBadge purpose={report.purpose} displayFont={displayFont} size="lg" />
         </div>
 
-        {/* title */}
-        <h1
-          style={{
-            fontFamily: '"Noto Serif JP", serif',
-            fontSize: 48,
-            fontWeight: 600,
-            lineHeight: 1.35,
-            margin: 0,
-            color: palette.ink,
-            letterSpacing: "0.01em",
-          }}
-        >
+        <h1 className={styles.title} style={{ color: palette.ink }}>
           {report.title}
         </h1>
 
-        {/* meta */}
-        <div
-          style={{
-            marginTop: 28,
-            display: "flex",
-            gap: 24,
-            alignItems: "baseline",
-            fontFamily: "ui-monospace, monospace",
-            fontSize: 12,
-            letterSpacing: "0.1em",
-            color: palette.inkSoft,
-          }}
-        >
+        <div className={styles.metaRow} style={{ color: palette.inkSoft }}>
           <span>@{report.contributor}</span>
           <span>{report.date}</span>
           <span>
@@ -134,107 +98,89 @@ export default async function ReportDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* hero image */}
       {report.hero_image && (
-        <section style={{ padding: "0 48px 48px" }}>
+        <section className={styles.heroSection}>
           <div
-            style={{
-              aspectRatio: "16/7",
-              backgroundImage: `url(${report.hero_image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
+            className={styles.heroImage}
+            style={{ backgroundImage: `url(${report.hero_image})` }}
           />
         </section>
       )}
 
-      {/* summary callout */}
-      <section style={{ padding: "0 48px 48px", maxWidth: 1100 }}>
+      <section className={styles.calloutSection}>
         <p
-          style={{
-            fontFamily: '"Noto Serif JP", serif',
-            fontSize: 22,
-            lineHeight: 1.85,
-            margin: 0,
-            color: palette.ink,
-            paddingLeft: 24,
-            borderLeft: `3px solid ${purposeMeta.color}`,
-          }}
+          className={styles.callout}
+          style={{ color: palette.ink, borderLeft: `3px solid ${purposeMeta.color}` }}
         >
           {report.summary}
         </p>
       </section>
 
-      {/* attachments */}
       {report.attachments && report.attachments.length > 0 && (
-        <section style={{ padding: "0 48px 64px", maxWidth: 1100 }}>
+        <section className={styles.attachmentSection}>
           <AttachmentList attachments={report.attachments} palette={palette} displayFont={displayFont} />
         </section>
       )}
 
-      {/* body */}
-      <section style={{ padding: "0 48px 80px", maxWidth: 880 }}>
+      <section className={styles.bodySection}>
         <article
           className="report-body"
           style={{
             fontFamily: '"Noto Sans JP", sans-serif',
-            fontSize: 16,
+            fontSize: 15,
             lineHeight: 1.95,
             color: palette.ink,
           }}
           dangerouslySetInnerHTML={{ __html: report.contentHtml }}
         />
         <style>{`
+          .report-body { font-size: 15px; }
+          @media (min-width: 768px) { .report-body { font-size: 16px; } }
           .report-body h2 {
             font-family: ${displayFont.stack};
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: -0.005em;
-            margin: 64px 0 20px;
+            margin: 48px 0 16px;
             padding-bottom: 12px;
             border-bottom: 1px solid ${palette.rule};
             color: ${palette.ink};
           }
+          @media (min-width: 768px) {
+            .report-body h2 { font-size: 28px; margin: 64px 0 20px; }
+          }
           .report-body h3 {
             font-family: ${displayFont.stack};
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             letter-spacing: 0.04em;
-            margin: 36px 0 12px;
+            margin: 28px 0 10px;
             color: ${palette.accentDeep};
           }
-          .report-body p {
-            margin: 16px 0;
+          @media (min-width: 768px) {
+            .report-body h3 { font-size: 18px; margin: 36px 0 12px; }
           }
-          .report-body ul {
-            padding-left: 1.4em;
-            margin: 16px 0;
-          }
-          .report-body li {
-            margin: 6px 0;
-          }
+          .report-body p { margin: 16px 0; }
+          .report-body ul { padding-left: 1.4em; margin: 16px 0; }
+          .report-body li { margin: 6px 0; }
           .report-body a {
             color: ${palette.accent};
             text-decoration: underline;
             text-underline-offset: 3px;
           }
-          .report-body strong {
-            color: ${palette.accentDeep};
-          }
+          .report-body strong { color: ${palette.accentDeep}; }
         `}</style>
       </section>
 
-      {/* gallery */}
       {report.gallery && report.gallery.length > 0 && (
-        <section style={{ padding: "0 48px 80px", maxWidth: 1100 }}>
+        <section className={styles.gallerySection}>
           <Gallery items={report.gallery} palette={palette} displayFont={displayFont} />
         </section>
       )}
 
-      {/* contributor card */}
       {contributor && (
-        <section style={{ padding: "0 48px 80px", maxWidth: 1100 }}>
+        <section className={styles.contributorSection}>
           <div
             style={{
               fontFamily: "ui-monospace, monospace",
@@ -242,29 +188,22 @@ export default async function ReportDetailPage({ params }: PageProps) {
               letterSpacing: "0.2em",
               textTransform: "uppercase",
               color: palette.inkSoft,
-              marginBottom: 16,
+              marginBottom: 14,
             }}
           >
             About the contributor
           </div>
           <article
+            className={styles.contributorCard}
             style={{
-              display: "grid",
-              gridTemplateColumns: "120px 1fr",
-              gap: 24,
-              padding: "28px 24px",
               border: `1px solid ${palette.rule}`,
               background: palette.paper,
             }}
           >
             <div
+              className={styles.contributorAvatar}
               style={{
-                width: 120,
-                height: 120,
-                borderRadius: "50%",
                 backgroundImage: contributor.avatar ? `url(${contributor.avatar})` : undefined,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
                 background: contributor.avatar ? undefined : palette.bgAlt,
                 filter: contributor.avatar ? "grayscale(0.4)" : undefined,
               }}
@@ -282,7 +221,10 @@ export default async function ReportDetailPage({ params }: PageProps) {
               >
                 @{contributor.id}
               </div>
-              <h3 style={{ fontFamily: displayFont.stack, fontSize: 26, fontWeight: 600, margin: 0, color: palette.ink }}>
+              <h3
+                className={styles.contributorName}
+                style={{ fontFamily: displayFont.stack, color: palette.ink }}
+              >
                 {contributor.name}
               </h3>
               <p style={{ fontSize: 14, lineHeight: 1.85, color: palette.inkSoft, margin: "10px 0 16px", whiteSpace: "pre-wrap" }}>
@@ -317,29 +259,13 @@ export default async function ReportDetailPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* related reports */}
       {relatedReports.length > 0 && (
-        <section style={{ padding: "0 48px 100px", maxWidth: 1100 }}>
+        <section className={styles.relatedSection}>
           <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "baseline",
-              marginBottom: 24,
-              borderBottom: `1px solid ${palette.rule}`,
-              paddingBottom: 16,
-            }}
+            className={styles.relatedHeader}
+            style={{ borderBottom: `1px solid ${palette.rule}` }}
           >
-            <h2
-              style={{
-                fontFamily: displayFont.stack,
-                fontSize: 28,
-                fontWeight: 600,
-                margin: 0,
-                textTransform: "uppercase",
-                letterSpacing: "0.02em",
-              }}
-            >
+            <h2 className={styles.relatedTitle} style={{ fontFamily: displayFont.stack }}>
               Other Reports for This Race
             </h2>
             <Link
@@ -358,7 +284,7 @@ export default async function ReportDetailPage({ params }: PageProps) {
               View All →
             </Link>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24 }}>
+          <div className={styles.relatedGrid}>
             {relatedReports.map((r) => (
               <ReportCard key={r.slug} report={r} palette={palette} displayFont={displayFont} />
             ))}
@@ -366,16 +292,9 @@ export default async function ReportDetailPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* back to race CTA */}
       <section
-        style={{
-          background: palette.accentDeep,
-          color: palette.bg,
-          padding: "60px 48px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
+        className={styles.cta}
+        style={{ background: palette.accentDeep, color: palette.bg }}
       >
         <div>
           <div
@@ -390,31 +309,14 @@ export default async function ReportDetailPage({ params }: PageProps) {
           >
             Back to race
           </div>
-          <div
-            style={{
-              fontFamily: displayFont.stack,
-              fontSize: 28,
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "-0.005em",
-            }}
-          >
+          <div className={styles.ctaTitle} style={{ fontFamily: displayFont.stack }}>
             {race.title_en ?? race.title}
           </div>
         </div>
         <Link
           href={`/races/${race.slug}`}
-          style={{
-            padding: "16px 28px",
-            background: palette.bg,
-            color: palette.ink,
-            fontFamily: displayFont.stack,
-            fontWeight: 600,
-            fontSize: 13,
-            letterSpacing: "0.16em",
-            textTransform: "uppercase",
-            textDecoration: "none",
-          }}
+          className={styles.ctaButton}
+          style={{ background: palette.bg, color: palette.ink, fontFamily: displayFont.stack }}
         >
           Race Page →
         </Link>

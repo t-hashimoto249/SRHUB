@@ -1,5 +1,6 @@
 import type { Race } from "@/types/content";
 import type { Palette, DisplayFont } from "./design-tokens";
+import styles from "./RaceMeta.module.css";
 
 export function RaceMeta({
   race,
@@ -20,47 +21,58 @@ export function RaceMeta({
     { k: "Terrain", v: race.terrain.join(" / ") },
     { k: "Support", v: race.support === "self" ? "Self-support" : "Full-support" },
   ];
+
+  if (layout === "col") {
+    return (
+      <dl
+        style={{
+          margin: 0,
+          display: "flex",
+          flexDirection: "column",
+          gap: 14,
+          borderTop: `1px solid ${palette.rule}`,
+        }}
+      >
+        {items.map((it) => (
+          <div key={it.k}>
+            <dt
+              className={styles.dt}
+              style={{ fontFamily: displayFont.stack, color: palette.inkSoft }}
+            >
+              {it.k}
+            </dt>
+            <dd
+              className={styles.dd}
+              style={{ fontFamily: displayFont.stack, color: palette.ink }}
+            >
+              {it.v}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    );
+  }
+
   return (
     <dl
+      className={styles.row}
       style={{
-        margin: 0,
-        display: layout === "row" ? "grid" : "flex",
-        gridTemplateColumns: layout === "row" ? `repeat(${items.length}, 1fr)` : undefined,
-        flexDirection: layout === "col" ? "column" : undefined,
-        gap: layout === "col" ? 14 : 0,
         borderTop: `1px solid ${palette.rule}`,
-        borderBottom: layout === "row" ? `1px solid ${palette.rule}` : "none",
-      }}
+        borderBottom: `1px solid ${palette.rule}`,
+        ["--rm-rule" as string]: palette.rule,
+      } as React.CSSProperties}
     >
-      {items.map((it, i) => (
-        <div
-          key={it.k}
-          style={{
-            padding: layout === "row" ? "14px 14px" : "0",
-            borderRight: layout === "row" && i < items.length - 1 ? `1px solid ${palette.rule}` : "none",
-          }}
-        >
+      {items.map((it) => (
+        <div key={it.k} className={styles.cell}>
           <dt
-            style={{
-              fontFamily: displayFont.stack,
-              fontSize: 10,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color: palette.inkSoft,
-              marginBottom: 4,
-            }}
+            className={styles.dt}
+            style={{ fontFamily: displayFont.stack, color: palette.inkSoft }}
           >
             {it.k}
           </dt>
           <dd
-            style={{
-              margin: 0,
-              fontFamily: displayFont.stack,
-              fontWeight: 500,
-              fontSize: 18,
-              color: palette.ink,
-              letterSpacing: "0.02em",
-            }}
+            className={styles.dd}
+            style={{ fontFamily: displayFont.stack, color: palette.ink }}
           >
             {it.v}
           </dd>

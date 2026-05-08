@@ -5,6 +5,7 @@ import type { Race, Report } from "@/types/content";
 import { MONTH_LABELS, type Palette, type DisplayFont } from "./design-tokens";
 import { Stars, Placeholder } from "./Brand";
 import { ReportPurposeTabs } from "./ReportPurposeTabs";
+import styles from "./RaceDetailChapters.module.css";
 
 type SectionId = "overview" | "schedule" | "gear" | "entry" | "reports" | "videos";
 
@@ -32,16 +33,16 @@ export function RaceDetailChapters({
   return (
     <>
       <nav
+        className={styles.nav}
         style={{
           position: "sticky",
           top: 0,
           zIndex: 5,
           background: palette.bg,
           borderBottom: `1px solid ${palette.rule}`,
-          padding: "0 48px",
         }}
       >
-        <div style={{ display: "flex", gap: 0, overflowX: "auto" }}>
+        <div className={styles.navInner}>
           {sections.map((s) => {
             const disabled = !s.available;
             return (
@@ -49,24 +50,14 @@ export function RaceDetailChapters({
                 key={s.id}
                 onClick={() => !disabled && setSection(s.id)}
                 disabled={disabled}
+                className={styles.navButton}
                 style={{
-                  padding: "20px 28px",
-                  border: "none",
-                  background: "transparent",
                   cursor: disabled ? "not-allowed" : "pointer",
                   opacity: disabled ? 0.35 : 1,
                   borderBottom:
                     section === s.id ? `2px solid ${palette.accent}` : "2px solid transparent",
                   color: section === s.id ? palette.ink : palette.inkSoft,
                   fontFamily: displayFont.stack,
-                  fontWeight: 500,
-                  fontSize: 14,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  display: "flex",
-                  alignItems: "baseline",
-                  gap: 10,
-                  whiteSpace: "nowrap",
                 }}
               >
                 <span
@@ -86,7 +77,7 @@ export function RaceDetailChapters({
         </div>
       </nav>
 
-      <section style={{ padding: "80px 48px", minHeight: 560 }}>
+      <section className={styles.section}>
         {section === "overview" && <ChapterOverview race={race} palette={palette} displayFont={displayFont} />}
         {section === "schedule" && <ChapterSchedule race={race} palette={palette} displayFont={displayFont} />}
         {section === "gear" && <ChapterGear race={race} palette={palette} displayFont={displayFont} />}
@@ -110,7 +101,7 @@ function ChapterOverview({
   displayFont: DisplayFont;
 }) {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, maxWidth: 1200 }}>
+    <div className={styles.overviewGrid}>
       <div>
         <div
           style={{
@@ -124,19 +115,11 @@ function ChapterOverview({
         >
           Summary
         </div>
-        <p
-          style={{
-            fontFamily: '"Noto Serif JP", serif',
-            fontSize: 18,
-            lineHeight: 1.9,
-            color: palette.ink,
-            margin: 0,
-          }}
-        >
+        <p className={styles.overviewSummary} style={{ color: palette.ink }}>
           {race.summary}
         </p>
         <div
-          style={{ marginTop: 32, fontSize: 14, lineHeight: 1.95, color: palette.ink }}
+          style={{ marginTop: 28, fontSize: 14, lineHeight: 1.95, color: palette.ink }}
           dangerouslySetInnerHTML={{ __html: race.contentHtml }}
         />
       </div>
@@ -167,13 +150,8 @@ function ChapterOverview({
           ] as const).map(([k, v]) => (
             <div
               key={k}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "160px 1fr",
-                gap: 16,
-                paddingBottom: 14,
-                borderBottom: `1px solid ${palette.rule}`,
-              }}
+              className={styles.overviewMetaRow}
+              style={{ borderBottom: `1px solid ${palette.rule}` }}
             >
               <dt
                 style={{
@@ -186,7 +164,12 @@ function ChapterOverview({
               >
                 {k}
               </dt>
-              <dd style={{ margin: 0, fontFamily: displayFont.stack, fontSize: 18, color: palette.ink }}>{v}</dd>
+              <dd
+                className={styles.overviewMetaValue}
+                style={{ margin: 0, fontFamily: displayFont.stack, color: palette.ink }}
+              >
+                {v}
+              </dd>
             </div>
           ))}
         </dl>
@@ -208,34 +191,22 @@ function ChapterSchedule({
   const kms = race.schedule.map((s) => parseInt(s.description, 10)).filter((n) => !Number.isNaN(n));
   const max = kms.length ? Math.max(...kms) : 0;
   return (
-    <div style={{ maxWidth: 1100 }}>
+    <div className={styles.schedule}>
       {race.schedule.map((s) => {
         const km = parseInt(s.description, 10) || 0;
         return (
           <div
             key={s.day}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "120px 100px 1fr",
-              gap: 24,
-              padding: "28px 0",
-              borderBottom: `1px solid ${palette.rule}`,
-              alignItems: "center",
-            }}
+            className={styles.scheduleRow}
+            style={{ borderBottom: `1px solid ${palette.rule}` }}
           >
             <div
-              style={{
-                fontFamily: displayFont.stack,
-                fontSize: 56,
-                fontWeight: 600,
-                color: palette.accent,
-                lineHeight: 1,
-                letterSpacing: "-0.02em",
-              }}
+              className={styles.scheduleDay}
+              style={{ fontFamily: displayFont.stack, color: palette.accent }}
             >
-              D<span style={{ fontSize: 36 }}>{s.day}</span>
+              D<span className={styles.scheduleDayInner}>{s.day}</span>
             </div>
-            <div>
+            <div className={styles.scheduleStat}>
               {km > 0 ? (
                 <>
                   <div style={{ fontFamily: displayFont.stack, fontSize: 28, fontWeight: 500, color: palette.ink }}>
@@ -257,7 +228,9 @@ function ChapterSchedule({
                 <div style={{ fontFamily: displayFont.stack, fontSize: 18, color: palette.inkSoft }}>—</div>
               )}
             </div>
-            <div style={{ fontSize: 15, color: palette.ink, lineHeight: 1.7 }}>{s.description}</div>
+            <div className={styles.scheduleDesc} style={{ color: palette.ink }}>
+              {s.description}
+            </div>
           </div>
         );
       })}
@@ -276,7 +249,7 @@ function ChapterGear({
 }) {
   if (!race.gear?.length) return null;
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, maxWidth: 1100 }}>
+    <div className={styles.gearGrid}>
       {race.gear.map((g, i) => {
         const isReq = !!g.mandatory;
         return (
@@ -366,47 +339,33 @@ function ChapterEntry({
     .split("\n")
     .filter(Boolean)
     .map((l) => l.replace(/^\d+\.\s*/, ""));
+  const desktopClass =
+    steps.length >= 4 ? styles.entryListMany : steps.length === 3 ? styles.entryListThree : "";
   return (
-    <div style={{ maxWidth: 1100 }}>
-      <ol
-        style={{
-          listStyle: "none",
-          padding: 0,
-          margin: 0,
-          display: "grid",
-          gridTemplateColumns: `repeat(${Math.min(steps.length, 4)}, 1fr)`,
-          gap: 24,
-        }}
-      >
-        {steps.map((step, i) => (
-          <li key={i} style={{ borderTop: `2px solid ${palette.accent}`, paddingTop: 20 }}>
-            <div
-              style={{
-                fontFamily: displayFont.stack,
-                fontSize: 11,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: palette.inkSoft,
-                marginBottom: 14,
-              }}
-            >
-              Step {String(i + 1).padStart(2, "0")}
-            </div>
-            <div
-              style={{
-                fontFamily: displayFont.stack,
-                fontSize: 22,
-                fontWeight: 500,
-                color: palette.ink,
-                lineHeight: 1.4,
-              }}
-            >
-              {step}
-            </div>
-          </li>
-        ))}
-      </ol>
-    </div>
+    <ol className={`${styles.entryList} ${desktopClass}`}>
+      {steps.map((step, i) => (
+        <li key={i} style={{ borderTop: `2px solid ${palette.accent}`, paddingTop: 20 }}>
+          <div
+            style={{
+              fontFamily: displayFont.stack,
+              fontSize: 11,
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: palette.inkSoft,
+              marginBottom: 14,
+            }}
+          >
+            Step {String(i + 1).padStart(2, "0")}
+          </div>
+          <div
+            className={styles.entryStepTitle}
+            style={{ fontFamily: displayFont.stack, color: palette.ink }}
+          >
+            {step}
+          </div>
+        </li>
+      ))}
+    </ol>
   );
 }
 
@@ -419,7 +378,7 @@ function ChapterVideos({
 }) {
   if (!race.videos?.length) return null;
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, maxWidth: 1200 }}>
+    <div className={styles.videoGrid}>
       {race.videos.map((v) => (
         <article key={v.id} style={{ cursor: "pointer" }}>
           <div style={{ position: "relative", aspectRatio: "16/9", background: palette.ink, overflow: "hidden" }}>

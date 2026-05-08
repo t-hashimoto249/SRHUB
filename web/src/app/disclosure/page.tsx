@@ -6,6 +6,7 @@ import {
 } from "@/components/design-tokens";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import styles from "../static-pages.module.css";
 
 export const metadata = {
   title: "Disclosure — Stage Race",
@@ -22,30 +23,11 @@ export default function DisclosurePage() {
       <SiteHeader palette={palette} displayFont={displayFont} variant="A" />
 
       {/* Hero */}
-      <section style={{ padding: "96px 48px 48px", maxWidth: 880 }}>
-        <div
-          style={{
-            fontFamily: "ui-monospace, monospace",
-            fontSize: 10,
-            letterSpacing: "0.24em",
-            color: palette.inkSoft,
-            marginBottom: 20,
-            textTransform: "uppercase",
-          }}
-        >
+      <section className={styles.heroSection} style={{ maxWidth: 880 }}>
+        <div className={styles.heroLabel} style={{ color: palette.inkSoft }}>
           Disclosure
         </div>
-        <h1
-          style={{
-            fontFamily: displayFont.stack,
-            fontSize: 64,
-            fontWeight: 600,
-            margin: 0,
-            lineHeight: 0.95,
-            textTransform: "uppercase",
-            letterSpacing: "-0.015em",
-          }}
-        >
+        <h1 className={styles.heroTitleMd} style={{ fontFamily: displayFont.stack }}>
           Affiliate &amp;<br />
           Sponsorship<br />
           <span style={{ color: palette.accent }}>Disclosure.</span>
@@ -53,7 +35,7 @@ export default function DisclosurePage() {
       </section>
 
       {/* Content */}
-      <section style={{ padding: "0 48px 100px", maxWidth: 760 }}>
+      <section className={styles.section} style={{ maxWidth: 760 }}>
         <Body palette={palette} displayFont={displayFont} />
       </section>
 
@@ -117,7 +99,7 @@ function Body({
     <div>
       {sections.map((s) => (
         <article key={s.n} style={{ marginBottom: 56 }}>
-          <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 14 }}>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 16, marginBottom: 14, flexWrap: "wrap" }}>
             <span
               style={{
                 fontFamily: "ui-monospace, monospace",
@@ -131,11 +113,12 @@ function Body({
             <h2
               style={{
                 fontFamily: displayFont.stack,
-                fontSize: 24,
+                fontSize: "clamp(18px, 4.5vw, 24px)",
                 fontWeight: 600,
                 margin: 0,
                 textTransform: "uppercase",
                 letterSpacing: "-0.005em",
+                lineHeight: 1.25,
               }}
             >
               {s.t}
