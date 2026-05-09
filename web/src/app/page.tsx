@@ -88,6 +88,8 @@ export default async function HomePage() {
         </section>
       )}
 
+      <ExploreSection palette={palette} displayFont={displayFont} />
+
       <SiteFooter palette={palette} displayFont={displayFont} />
     </div>
   );
@@ -225,6 +227,74 @@ function FourSplitHero({
               >
                 {r.title_en ?? r.title}
               </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function ExploreSection({
+  palette,
+  displayFont,
+}: {
+  palette: Palette;
+  displayFont: DisplayFont;
+}) {
+  const cards = [
+    {
+      href: "/races",
+      kicker: "Index 01",
+      title: "All Races",
+      lead: "大陸・距離・地形・難易度・開催月などからステージレースを横断的に検索できます。",
+    },
+    {
+      href: "/reports",
+      kicker: "Index 02",
+      title: "All Reports",
+      lead: "作成者・レース・目的・作成時期・開催月から、走った人のレポートを検索できます。",
+    },
+  ];
+  return (
+    <section className={styles.exploreSection}>
+      <div className={styles.exploreLabel} style={{ color: palette.inkSoft, fontFamily: displayFont.stack }}>
+        Explore the archive
+      </div>
+      <h2 className={styles.exploreHeading} style={{ fontFamily: displayFont.stack, color: palette.ink }}>
+        Find your next stage.
+      </h2>
+      <div className={styles.exploreGrid}>
+        {cards.map((c) => (
+          <Link
+            key={c.href}
+            href={c.href}
+            className={styles.exploreCard}
+            style={{
+              border: `1px solid ${palette.rule}`,
+              background: palette.paper,
+              color: palette.ink,
+            }}
+          >
+            <div>
+              <div className={styles.exploreCardKicker} style={{ color: palette.inkSoft }}>
+                {c.kicker}
+              </div>
+              <h3
+                className={styles.exploreCardTitle}
+                style={{ fontFamily: displayFont.stack, color: palette.ink }}
+              >
+                {c.title}
+              </h3>
+              <p className={styles.exploreCardLead} style={{ color: palette.inkSoft }}>
+                {c.lead}
+              </p>
+            </div>
+            <div
+              className={styles.exploreCardArrow}
+              style={{ fontFamily: displayFont.stack, color: palette.accentDeep }}
+            >
+              Browse →
             </div>
           </Link>
         ))}

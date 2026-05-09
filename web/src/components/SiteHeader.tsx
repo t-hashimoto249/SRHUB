@@ -16,6 +16,7 @@ interface SiteHeaderProps {
 const NAV = [
   { id: "home", label: "Home", href: "/" },
   { id: "races", label: "Races", href: "/races" },
+  { id: "reports", label: "Reports", href: "/reports" },
   { id: "partners", label: "Partners", href: "/partners" },
   { id: "about", label: "About", href: "/about" },
 ] as const;

@@ -194,3 +194,102 @@
   text-transform: uppercase;
   line-height: 1.6;
 }
+
+.exploreSection {
+  padding: 0 var(--page-x) 80px;
+}
+
+@media (min-width: 768px) {
+  .exploreSection {
+    padding: 0 var(--page-x) 100px;
+  }
+}
+
+.exploreLabel {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.exploreHeading {
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 600;
+  margin: 0 0 28px;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .exploreHeading {
+    margin-bottom: 36px;
+  }
+}
+
+.exploreGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .exploreGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+.exploreCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px 24px;
+  min-height: 200px;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .exploreCard {
+    padding: 36px 32px;
+    min-height: 240px;
+  }
+}
+
+.exploreCard:hover {
+  transform: translateY(-2px);
+}
+
+.exploreCardKicker {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.exploreCardTitle {
+  font-size: clamp(36px, 7vw, 56px);
+  font-weight: 600;
+  margin: 16px 0 12px;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+.exploreCardLead {
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.exploreCardArrow {
+  margin-top: 24px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
