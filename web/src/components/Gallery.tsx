@@ -74,6 +74,17 @@ function GalleryCell({
             referrerPolicy="strict-origin-when-cross-origin"
             style={{ width: "100%", height: "100%", border: 0, display: "block" }}
           />
+        ) : item.kind === "video" ? (
+          <video
+            controls
+            preload="metadata"
+            playsInline
+            poster={item.poster}
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", background: "#000" }}
+          >
+            <source src={item.src} type={item.mime} />
+            お使いのブラウザでは動画を再生できません。
+          </video>
         ) : (
           <a
             href={item.src}
@@ -114,7 +125,7 @@ function GalleryCell({
               flex: "0 0 auto",
             }}
           >
-            {item.kind === "youtube" ? "Video" : "Photo"}
+            {item.kind === "youtube" || item.kind === "video" ? "Video" : "Photo"}
           </span>
           <span style={{ flex: 1 }}>{item.caption}</span>
         </figcaption>

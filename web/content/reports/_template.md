@@ -20,7 +20,7 @@ attachments:
     kind: spreadsheet
 
 # 任意：写真と動画のギャラリー（本文末尾にグリッド表示される）
-# 画像は /images/reports/<slug>/ 以下に配置するのがおすすめ
+# 画像は /images/reports/<slug>/ 以下、動画ファイルは /videos/reports/<slug>/ 以下に配置するのがおすすめ
 # YouTube は動画 ID（URL の v= に続く文字列、例 dQw4w9WgXcQ）
 gallery:
   - kind: image
@@ -33,6 +33,11 @@ gallery:
   - kind: youtube
     src: dQw4w9WgXcQ          # YouTube 動画 ID のみ（URL ではない）
     caption: 公式ハイライト映像
+  - kind: video
+    src: /videos/reports/mds-2021-tk-hashimoto/day4-night.mp4   # サイトに置いた動画ファイル（public/ 起点）
+    poster: /images/reports/mds-2021-tk-hashimoto/day4-night.jpg # 任意：再生前のサムネイル
+    mime: video/mp4                                              # 任意：MIME type
+    caption: オーバーナイトステージの夜間走行
 ---
 
 <!--

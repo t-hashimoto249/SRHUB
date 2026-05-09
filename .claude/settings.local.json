@@ -28,7 +28,18 @@
       "Bash(curl -s http://localhost:3001/)",
       "Bash(curl -s http://localhost:3001/races)",
       "Bash(curl -sf http://localhost:3001/)",
-      "Bash(sips *)"
+      "Bash(sips *)",
+      "Bash(git *)",
+      "Bash(curl -fsSL \"https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DPBRfhs8tzKU&format=json\")",
+      "Bash(curl -fsSL \"https://www.youtube.com/oembed?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DcdRW7Snn8Rs&format=json\")",
+      "Bash(echo \"exit=$?\")",
+      "Bash(curl *)",
+      "Bash(kill %1)",
+      "Bash(pkill -f \"next-server\")",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(PORT=3000 curl -sL \"http://localhost:3000/reports\")",
+      "Bash(lsof -ti:3000,3001,3002)",
+      "Bash(ps -p 10887 -o command=)"
     ]
   }
 }

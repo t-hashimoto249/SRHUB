@@ -6,6 +6,7 @@ import html from "remark-html";
 import type {
   Race,
   RaceFrontmatter,
+  RaceVideo,
   Report,
   ReportFrontmatter,
   Contributor,
@@ -17,9 +18,143 @@ import type {
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
+const oembedCache = new Map<string, Promise<{ title?: string; channel?: string; channelUrl?: string }>>();
+
+async function fetchYouTubeOEmbed(
+  id: string,
+): Promise<{ title?: string; channel?: string; channelUrl?: string }> {
+  const cached = oembedCache.get(id);
+  if (cached) return cached;
+  const promise = (async () => {
+    try {
+      const url = `https://www.youtube.com/oembed?url=${encodeURIComponent(
+        `https://www.youtube.com/watch?v=${id}`,
+      )}&format=json`;
+      const res = await fetch(url);
+      if (!res.ok) return {};
+      const data = (await res.json()) as {
+        title?: string;
+        author_name?: string;
+        author_url?: string;
+      };
+      return { title: data.title, channel: data.author_name, channelUrl: data.author_url };
+    } catch {
+      return {};
+    }
+  })();
+  oembedCache.set(id, promise);
+  return promise;
+}
+
+async function resolveRaceVideos(
+  videos: RaceVideo[] | undefined,
+): Promise<RaceVideo[] | undefined> {
+  if (!videos?.length) return videos;
+  return Promise.all(
+    videos.map(async (v) => {
+      if (v.title && v.channel) return v;
+      const fetched = await fetchYouTubeOEmbed(v.id);
+      return {
+        ...v,
+        title: v.title ?? fetched.title,
+        channel: v.channel ?? fetched.channel,
+        channelUrl: v.channelUrl ?? fetched.channelUrl,
+      };
+    }),
+  );
+}
+
+const MEDIA_MARKER_RE = /\[(動画|写真)[：:]\s*([^\]]+?)\]:?/g;
+
+function normalizeMediaPath(raw: string): string {
+  let p = raw.trim();
+  p = p.replace(/^\.?\/?web\/public\//, "/");
+  p = p.replace(/^public\//, "/");
+  if (!/^https?:\/\//.test(p) && !p.startsWith("/")) p = "/" + p;
+  return p;
+}
+
+function captionFromPath(p: string): string {
+  let base = p.split("/").pop() ?? "";
+  try {
+    base = decodeURIComponent(base);
+  } catch {
+    // 既にデコード済みなどで失敗した場合はそのまま
+  }
+  return base.replace(/\.[^.]+$/, "");
+}
+
+function escapeAttr(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+}
+
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function renderMediaHtml(kind: "動画" | "写真", src: string, caption: string): string {
+  const safeSrc = escapeAttr(src);
+  const safeCap = escapeHtml(caption);
+  if (kind === "動画") {
+    return (
+      `<figure class="report-media report-media-video">` +
+      `<video controls preload="metadata" playsinline>` +
+      `<source src="${safeSrc}">` +
+      `お使いのブラウザでは動画を再生できません。` +
+      `</video>` +
+      `<figcaption>${safeCap}</figcaption>` +
+      `</figure>`
+    );
+  }
+  return (
+    `<figure class="report-media report-media-photo">` +
+    `<a href="${safeSrc}" target="_blank" rel="noopener noreferrer">` +
+    `<img src="${safeSrc}" alt="${safeCap}" loading="lazy">` +
+    `</a>` +
+    `<figcaption>${safeCap}</figcaption>` +
+    `</figure>`
+  );
+}
+
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function extractMediaMarkers(body: string): {
+  body: string;
+  replacements: Map<string, string>;
+} {
+  const replacements = new Map<string, string>();
+  let i = 0;
+  const out = body.replace(MEDIA_MARKER_RE, (_match, kind: string, rawPath: string) => {
+    const token = `MEDIAPLACEHOLDER${i++}TOKEN`;
+    const src = normalizeMediaPath(rawPath);
+    const caption = captionFromPath(src);
+    replacements.set(token, renderMediaHtml(kind as "動画" | "写真", src, caption));
+    return token;
+  });
+  return { body: out, replacements };
+}
+
+function applyMediaReplacements(htmlOut: string, replacements: Map<string, string>): string {
+  if (replacements.size === 0) return htmlOut;
+  const tokens = Array.from(replacements.keys()).map(escapeRegExp).join("|");
+  // 連続するプレースホルダのみを含む <p>...</p> は囲みを外して block 化する
+  const paragraphRE = new RegExp(
+    `<p>\\s*((?:(?:${tokens})(?:\\s|<br\\s*/?>)*)+)</p>`,
+    "g",
+  );
+  let out = htmlOut.replace(paragraphRE, (_, inner: string) => inner);
+  for (const [token, replacement] of replacements) {
+    out = out.split(token).join(replacement);
+  }
+  return out;
+}
+
 async function renderMarkdown(body: string): Promise<string> {
-  const processed = await remark().use(html).process(body);
-  return processed.toString();
+  const { body: prepared, replacements } = extractMediaMarkers(body);
+  const processed = await remark().use(html).process(prepared);
+  return applyMediaReplacements(processed.toString(), replacements);
 }
 
 async function listMarkdownFiles(dir: string): Promise<string[]> {
@@ -65,8 +200,14 @@ export async function getAllRaces(): Promise<Race[]> {
     files.map(async (file) => {
       const { data, body } = await readMarkdown<RaceFrontmatter>(path.join(dir, file));
       const contentHtml = await renderMarkdown(body);
-      const { gear, ...rest } = data;
-      return { ...rest, gear: normalizeGear(gear), contentHtml } as Race;
+      const { gear, videos, ...rest } = data;
+      const resolvedVideos = await resolveRaceVideos(videos);
+      return {
+        ...rest,
+        gear: normalizeGear(gear),
+        videos: resolvedVideos,
+        contentHtml,
+      } as Race;
     }),
   );
   return races.sort((a, b) => a.title.localeCompare(b.title, "ja"));

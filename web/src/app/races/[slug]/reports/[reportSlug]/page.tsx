@@ -170,6 +170,33 @@ export default async function ReportDetailPage({ params }: PageProps) {
             text-underline-offset: 3px;
           }
           .report-body strong { color: ${palette.accentDeep}; }
+          .report-body .report-media {
+            margin: 28px auto;
+            max-width: 720px;
+          }
+          .report-body .report-media video,
+          .report-body .report-media img {
+            display: block;
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            background: #000;
+            border: 1px solid ${palette.rule};
+          }
+          .report-body .report-media-photo img {
+            background: ${palette.bgAlt};
+          }
+          .report-body .report-media a {
+            display: block;
+            text-decoration: none;
+            border: 0;
+          }
+          .report-body .report-media figcaption {
+            margin-top: 8px;
+            text-align: center;
+            font-size: 12px;
+            color: ${palette.inkSoft};
+          }
         `}</style>
       </section>
 

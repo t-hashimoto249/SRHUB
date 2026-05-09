@@ -16,9 +16,9 @@ export function ReportCard({
     <Link
       href={`/races/${report.race_slug}/reports/${report.slug}`}
       style={{
-        display: "grid",
-        gridTemplateColumns: "180px 1fr",
-        gap: 20,
+        display: "flex",
+        flexDirection: "column",
+        gap: 14,
         cursor: "pointer",
         borderTop: `1px solid ${palette.rule}`,
         paddingTop: 20,
@@ -28,7 +28,8 @@ export function ReportCard({
     >
       <div
         style={{
-          aspectRatio: "4/5",
+          aspectRatio: "16/10",
+          width: "100%",
           backgroundImage: report.hero_image ? `url(${report.hero_image})` : undefined,
           backgroundSize: "cover",
           backgroundPosition: "center",

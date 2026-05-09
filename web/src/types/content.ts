@@ -37,8 +37,10 @@ export interface ScheduleEntry {
 }
 
 export interface RaceVideo {
-  id: string;
-  title: string;
+  id: string;            // YouTube 動画 ID（"dQw4w9WgXcQ" のような形式）
+  title?: string;        // 任意：未指定時は YouTube から自動取得
+  channel?: string;      // 任意：未指定時は YouTube から自動取得（投稿チャンネル名）
+  channelUrl?: string;   // 任意：未指定時は YouTube から自動取得（チャンネル URL）
 }
 
 export interface GearEntry {
@@ -110,13 +112,15 @@ export interface ReportAttachment {
   description?: string;
 }
 
-export type GalleryItemKind = "image" | "youtube";
+export type GalleryItemKind = "image" | "youtube" | "video";
 
 export interface GalleryItem {
   kind: GalleryItemKind;
-  src: string;        // image: 画像パス または URL / youtube: 動画 ID（"dQw4w9WgXcQ" のような形式）
+  src: string;        // image: 画像パス または URL / youtube: 動画 ID（"dQw4w9WgXcQ" のような形式） / video: 動画ファイルのパス または URL
   caption?: string;   // 説明文
   alt?: string;       // 画像のみ：alt テキスト（任意、未指定時は caption を使用）
+  poster?: string;    // video のみ：再生前に表示するサムネイル画像のパス（任意）
+  mime?: string;      // video のみ：MIME type（任意。例 "video/mp4"。未指定時はブラウザに任せる）
 }
 
 export interface ReportFrontmatter {

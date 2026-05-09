@@ -40,3 +40,12 @@ yarn-error.log*
 # typescript
 /web/*.tsbuildinfo
 /web/next-env.d.ts
+
+# media (host on external CDN, e.g. Cloudflare R2)
+*.mov
+*.MOV
+*.mp4
+*.webm
+
+# local archive for media moved out of the repo
+/_archive/

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { Race, Report } from "@/types/content";
 import { MONTH_LABELS, type Palette, type DisplayFont } from "./design-tokens";
-import { Stars, Placeholder } from "./Brand";
+import { Stars } from "./Brand";
 import { ReportPurposeTabs } from "./ReportPurposeTabs";
 import styles from "./RaceDetailChapters.module.css";
 
@@ -380,46 +380,73 @@ function ChapterVideos({
   return (
     <div className={styles.videoGrid}>
       {race.videos.map((v) => (
-        <article key={v.id} style={{ cursor: "pointer" }}>
+        <article key={v.id}>
           <div style={{ position: "relative", aspectRatio: "16/9", background: palette.ink, overflow: "hidden" }}>
-            <Placeholder label={`youtube · ${v.id}`} ratio="16/9" tone="dark" />
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <div
-                style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: "50%",
-                  border: "1.5px solid #fff",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#fff",
-                }}
-              >
-                ▶
-              </div>
-            </div>
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${encodeURIComponent(v.id)}`}
+              title={v.title ?? `YouTube video ${v.id}`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              referrerPolicy="strict-origin-when-cross-origin"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
+            />
           </div>
-          <h4
-            style={{
-              fontFamily: '"Noto Serif JP", serif',
-              fontSize: 17,
-              fontWeight: 600,
-              margin: "14px 0 0",
-              color: palette.ink,
-              lineHeight: 1.5,
-            }}
-          >
-            {v.title}
-          </h4>
+          {(v.title || v.channel) && (
+            <div style={{ marginTop: 14 }}>
+              {v.title && (
+                <h4
+                  style={{
+                    fontFamily: '"Noto Serif JP", serif',
+                    fontSize: 17,
+                    fontWeight: 600,
+                    margin: 0,
+                    color: palette.ink,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {v.title}
+                </h4>
+              )}
+              {v.channel && (
+                <div
+                  style={{
+                    marginTop: 6,
+                    fontFamily: '"Noto Sans JP", sans-serif',
+                    fontSize: 12,
+                    color: palette.inkSoft,
+                    display: "flex",
+                    gap: 8,
+                    alignItems: "baseline",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "ui-monospace, monospace",
+                      fontSize: 9,
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      color: palette.accent,
+                    }}
+                  >
+                    Channel
+                  </span>
+                  {v.channelUrl ? (
+                    <a
+                      href={v.channelUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: palette.inkSoft, textDecoration: "underline" }}
+                    >
+                      {v.channel}
+                    </a>
+                  ) : (
+                    <span>{v.channel}</span>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
         </article>
       ))}
     </div>

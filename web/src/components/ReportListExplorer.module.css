@@ -118,8 +118,8 @@
 
 .reportRow {
   display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 14px;
   padding: 20px 0;
   text-decoration: none;
   color: inherit;
@@ -127,16 +127,22 @@
 
 @media (min-width: 768px) {
   .reportRow {
-    grid-template-columns: 200px 1fr;
-    gap: 24px;
+    grid-template-columns: 280px 1fr;
+    gap: 28px;
     padding: 24px 0;
   }
 }
 
 .reportThumb {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 16 / 10;
   background-size: cover;
   background-position: center;
+}
+
+@media (min-width: 768px) {
+  .reportThumb {
+    aspect-ratio: 4 / 5;
+  }
 }
 
 .reportTitle {
