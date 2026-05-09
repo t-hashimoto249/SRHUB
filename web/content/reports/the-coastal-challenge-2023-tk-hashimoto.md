@@ -56,8 +56,8 @@ attachments:
 ゴール後は食事タイム。食事はスープにチキンと普通に美味しかったです。お湯ももらえるのでカップラーメンなど持って行くと美味しく食べれる。
 味噌汁などは持っていって良かった。
 
-[動画: https://pub-b05f308e99ae4392b0b247b1eeedd764.r2.dev/reports/2023-tk-hashimoto-TheCoastalChallenge/ゴール後川渡り.mp4]
-[動画: https://pub-b05f308e99ae4392b0b247b1eeedd764.r2.dev/reports/2023-tk-hashimoto-TheCoastalChallenge/食事とテント会場.mp4]
+[動画: https://media.srhub.jp/reports/2023-tk-hashimoto-TheCoastalChallenge/ゴール後川渡り.mp4]
+[動画: https://media.srhub.jp/reports/2023-tk-hashimoto-TheCoastalChallenge/食事とテント会場.mp4]
 [写真： web/public/images/reports/2023-tk-hashimoto-TheCoastalChallenge/食事.jpg]
 
 ### Day 2 — 40km / 川と山
@@ -66,37 +66,37 @@ attachments:
 川に入れるので多少暑さはマシにはなった。後半は海沿いの砂浜を走りました。
 基本的に走りやすいロードみたいなところはなく山、川、浜辺といろんなところを走れるのは魅力的！
 ゴール後は何人かの選手はゴール地点にある売店でビールを買って飲んでいた。
-[動画: https://pub-b05f308e99ae4392b0b247b1eeedd764.r2.dev/reports/2023-tk-hashimoto-TheCoastalChallenge/川渡り.mp4]
+[動画: https://media.srhub.jp/reports/2023-tk-hashimoto-TheCoastalChallenge/川渡り.mp4]
 
 ### Day 3 — 50km / ジャングルと川
 　3日目は最長の50km。最初は川沿いをひたすら登った。足場が悪く怪我しそうでなかなか走れませんでした。
 気温も暑く、トップ選手もここでリタイアしている選手もいた。女子のトップ選手も足を怪我したのか、前半で抜かすことができた。
 途中で大きな滝をバックに写真を撮るコースがあり、運営に一人ずつ行きなさいと言われたが、無我夢中で走っていたので、前の選手と一緒に走ってしまった。
 この日は山に川に色々と走った。そこには絶景が広がっていました。
-[動画: https://pub-b05f308e99ae4392b0b247b1eeedd764.r2.dev/reports/2023-tk-hashimoto-TheCoastalChallenge/絶景.mp4]
+[動画: https://media.srhub.jp/reports/2023-tk-hashimoto-TheCoastalChallenge/絶景.mp4]
 
 今日の最後にはロードを走る区間があった。ただ、坂道でとても走りずらい記憶がある。
 テントは毎日一人用の点が支給され、ゴール後に割り振られている番号のテントに移動する。が、気候のせいか虫や蟻が多く、特に赤い蟻が足を噛んでくるので注意が必要。
 ものすごく痛かったのを覚えている。相変わらずご飯はたくさん食べれた。特にドラゴンフルーツのようなフルーツが美味しかった。
 
-[動画: https://pub-b05f308e99ae4392b0b247b1eeedd764.r2.dev/reports/2023-tk-hashimoto-TheCoastalChallenge/川沿いの岩を走る.mp4]
+[動画: https://media.srhub.jp/reports/2023-tk-hashimoto-TheCoastalChallenge/川沿いの岩を走る.mp4]
 [写真： web/public/images/reports/2023-tk-hashimoto-TheCoastalChallenge/滝.jpg]
 
 ### Day 4 — 40km / 川と山
 この日は車ごと川を渡る独特の船？からスタート。
-[動画: https://pub-b05f308e99ae4392b0b247b1eeedd764.r2.dev/reports/2023-tk-hashimoto-TheCoastalChallenge/コスタリカ特有の車の川渡り.mp4]
+[動画: https://media.srhub.jp/reports/2023-tk-hashimoto-TheCoastalChallenge/コスタリカ特有の車の川渡り.mp4]
 この辺からは筋肉痛との闘い。走りにくい山の登りと下りをひたすら耐えながら走る。川と山と海とジャングル！で風景は変わらない。
 ひたすらきつい登りを走った。途中で動物が放し飼いされていて、かなり近い距離を走った。
-[動画: https://pub-b05f308e99ae4392b0b247b1eeedd764.r2.dev/reports/2023-tk-hashimoto-TheCoastalChallenge/動物.mp4]
+[動画: https://media.srhub.jp/reports/2023-tk-hashimoto-TheCoastalChallenge/動物.mp4]
 
 きつい山をたくさんの登り、最後の下りを終えたところに、石で作られた水風呂が待っていました。
-[動画: https://pub-b05f308e99ae4392b0b247b1eeedd764.r2.dev/reports/2023-tk-hashimoto-TheCoastalChallenge/水風呂.mp4]
+[動画: https://media.srhub.jp/reports/2023-tk-hashimoto-TheCoastalChallenge/水風呂.mp4]
 ### Day 5 — 39km / 海と山
 この日も同様に海に山にジャングルに！これまでのコースと同じようなコースを走る。
 ゴールの手前にボートが必要な川があり、何人か集まらないとボートを出してくれないというレースにあるまじき場所があった。
 私は後ろの選手を5分以上待たされて出発した。
 この日のゴールは海沿いでバカンスできるとても綺麗な場所でした。
-[動画: https://pub-b05f308e99ae4392b0b247b1eeedd764.r2.dev/reports/2023-tk-hashimoto-TheCoastalChallenge/バカンス.mp4]
+[動画: https://media.srhub.jp/reports/2023-tk-hashimoto-TheCoastalChallenge/バカンス.mp4]
 
 ### Day 6 — 35km / 山と浜辺
 最終日は順位がほぼ決まっているので、みんなでスタート、ゆっくりみんなで走る形でした。最後の15~20kmはひたすら浜辺を走って戻るコース。
