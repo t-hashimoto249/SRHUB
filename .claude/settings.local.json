@@ -39,7 +39,22 @@
       "Bash(pkill -f \"next dev\")",
       "Bash(PORT=3000 curl -sL \"http://localhost:3000/reports\")",
       "Bash(lsof -ti:3000,3001,3002)",
-      "Bash(ps -p 10887 -o command=)"
+      "Bash(ps -p 10887 -o command=)",
+      "Bash(grep -iE \"\\\\.\\(mov|mp4|webm|jpg|jpeg|png|gif\\)$\")",
+      "Bash(xargs -I{} ls -lh {})",
+      "Bash(grep -iE \"\\\\.\\(mov|mp4\\)$\")",
+      "Bash(mkdir -p _archive/reports/2023-tk-hashimoto-TheCoastalChallenge)",
+      "Bash(ls -1 *.MOV *.mov)",
+      "Bash(awk 'NR==99' web/content/reports/the-coastal-challenge-2023-tk-hashimoto.md)",
+      "Bash(xxd)",
+      "Bash(xargs -0 -n 1 sh -c 'case \"$0\" in *.MOV|*.mov|*.mp4\\) git rm -f --cached -- \"$0\" ;; esac')",
+      "Bash(ffmpeg -version)",
+      "Bash(brew --version)",
+      "Bash(brew install *)",
+      "Bash(awk '{print $5, $NF}')",
+      "Bash(open *)",
+      "Bash(perl -i -pe ' *)",
+      "Bash(perl -i -pe 's{https://pub-b05f308e99ae4392b0b247b1eeedd764\\\\.r2\\\\.dev/}{https://media.srhub.jp/}g' web/content/reports/the-coastal-challenge-2023-tk-hashimoto.md)"
     ]
   }
 }

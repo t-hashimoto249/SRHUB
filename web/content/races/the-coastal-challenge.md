@@ -1,5 +1,5 @@
 ---
-title: ザ・コースタル・チャレンジ
+title: ザ・コスタル・チャレンジ
 title_en: The Coastal Challenge
 slug: the-coastal-challenge
 country: コスタリカ
