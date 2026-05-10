@@ -49,3 +49,6 @@ yarn-error.log*
 
 # local archive for media moved out of the repo
 /_archive/
+
+# working space
+/work

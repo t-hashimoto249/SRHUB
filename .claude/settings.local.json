@@ -54,7 +54,9 @@
       "Bash(awk '{print $5, $NF}')",
       "Bash(open *)",
       "Bash(perl -i -pe ' *)",
-      "Bash(perl -i -pe 's{https://pub-b05f308e99ae4392b0b247b1eeedd764\\\\.r2\\\\.dev/}{https://media.srhub.jp/}g' web/content/reports/the-coastal-challenge-2023-tk-hashimoto.md)"
+      "Bash(perl -i -pe 's{https://pub-b05f308e99ae4392b0b247b1eeedd764\\\\.r2\\\\.dev/}{https://media.srhub.jp/}g' web/content/reports/the-coastal-challenge-2023-tk-hashimoto.md)",
+      "WebFetch(domain:www.instagram.com)",
+      "Bash(node -e ' *)"
     ]
   }
 }

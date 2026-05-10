@@ -21,7 +21,10 @@ export default async function HomePage() {
   ]);
   const palette = PALETTES[SELECTED_PALETTE_KEY];
   const displayFont = DISPLAY_FONTS[SELECTED_FONT_KEY];
-  const featured = races.slice(0, 4);
+  const FEATURED_SLUGS = ["ultra-africa-race", "ultra-bolivia-race", "the-coastal-challenge"];
+  const featured = FEATURED_SLUGS
+    .map((slug) => races.find((r) => r.slug === slug))
+    .filter((r): r is Race => Boolean(r));
   const latestReports = reports.slice(0, 3);
   const contributorMap = new Map(contributors.map((c) => [c.id, c]));
 
