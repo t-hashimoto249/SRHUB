@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useMemo, useState, type ReactNode } from "react";
 import {
   REPORT_PURPOSE_LABEL,
@@ -398,11 +399,18 @@ export function ReportListExplorer({
               >
                 <div
                   className={styles.reportThumb}
-                  style={{
-                    backgroundImage: r.hero_image ? `url(${r.hero_image})` : undefined,
-                    background: r.hero_image ? undefined : palette.bgAlt,
-                  }}
-                />
+                  style={{ background: r.hero_image ? undefined : palette.bgAlt }}
+                >
+                  {r.hero_image && (
+                    <Image
+                      src={r.hero_image}
+                      alt={r.title}
+                      fill
+                      sizes="(min-width: 768px) 280px, 100vw"
+                      style={{ objectFit: "cover", objectPosition: "center" }}
+                    />
+                  )}
+                </div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <div style={{ marginBottom: 12 }}>
                     <PurposeBadge purpose={r.purpose} displayFont={displayFont} />

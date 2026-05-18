@@ -56,7 +56,14 @@
       "Bash(perl -i -pe ' *)",
       "Bash(perl -i -pe 's{https://pub-b05f308e99ae4392b0b247b1eeedd764\\\\.r2\\\\.dev/}{https://media.srhub.jp/}g' web/content/reports/the-coastal-challenge-2023-tk-hashimoto.md)",
       "WebFetch(domain:www.instagram.com)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(unzip -p work/race/サハラ記事.docx word/document.xml)",
+      "Bash(python3 -c ' *)",
+      "Bash(unzip -l work/race/サハラ記事.docx)",
+      "Bash(md5 *)",
+      "Read(//tmp/**)",
+      "Bash(ps -p 97985 -o command=)",
+      "mcp__ide__getDiagnostics"
     ]
   }
 }

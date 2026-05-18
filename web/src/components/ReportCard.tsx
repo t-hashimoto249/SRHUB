@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Report } from "@/types/content";
 import type { Palette, DisplayFont } from "./design-tokens";
 import { PurposeBadge } from "./PurposeBadge";
@@ -30,12 +31,21 @@ export function ReportCard({
         style={{
           aspectRatio: "16/10",
           width: "100%",
-          backgroundImage: report.hero_image ? `url(${report.hero_image})` : undefined,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          position: "relative",
+          overflow: "hidden",
           background: report.hero_image ? undefined : palette.bgAlt,
         }}
-      />
+      >
+        {report.hero_image && (
+          <Image
+            src={report.hero_image}
+            alt={report.title}
+            fill
+            sizes="(min-width: 1024px) 400px, 100vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
+          />
+        )}
+      </div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ marginBottom: 12 }}>
           <PurposeBadge purpose={report.purpose} displayFont={displayFont} />

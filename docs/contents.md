@@ -11,10 +11,6 @@ mongolian Trail Run：　https://mongoliatrailrun.com/en/inicio-english/
 The Track Australia：　https://www.canal-aventure.com/en/the-track-australia
 Grand To Grand Ultra：　https://g2gultra.com/
 
-MDS Cappadocia: 
-MDS jordan
-
-
 
 
 
