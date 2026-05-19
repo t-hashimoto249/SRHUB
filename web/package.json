@@ -17,6 +17,7 @@
     "remark-html": "^16.0.1"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260518.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

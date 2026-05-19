@@ -10,6 +10,7 @@ import {
 } from "@/components/design-tokens";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { WorldMap } from "@/components/WorldMap";
 import { REPORT_PURPOSE_LABEL, type Race, type Report, type Contributor } from "@/types/content";
 import styles from "./page.module.css";
 
@@ -21,12 +22,22 @@ export default async function HomePage() {
   ]);
   const palette = PALETTES[SELECTED_PALETTE_KEY];
   const displayFont = DISPLAY_FONTS[SELECTED_FONT_KEY];
-  const FEATURED_SLUGS = ["ultra-africa-race", "ultra-bolivia-race", "the-coastal-challenge"];
+  const FEATURED_SLUGS = [
+    "ultra-africa-race",
+    "ultra-bolivia-race",
+    "the-coastal-challenge",
+    "marathon-des-sables",
+  ];
   const featured = FEATURED_SLUGS
     .map((slug) => races.find((r) => r.slug === slug))
     .filter((r): r is Race => Boolean(r));
-  const latestReports = reports.slice(0, 3);
+  const latestReports = reports.slice(0, 4);
   const contributorMap = new Map(contributors.map((c) => [c.id, c]));
+  const racesForMap = races.map((race) => {
+    const { contentHtml: _contentHtml, ...rest } = race;
+    void _contentHtml;
+    return rest;
+  });
 
   return (
     <div style={{ background: palette.bg, color: palette.ink, fontFamily: '"Noto Sans JP", sans-serif' }}>
@@ -92,6 +103,32 @@ export default async function HomePage() {
       )}
 
       <ExploreSection palette={palette} displayFont={displayFont} />
+
+      <section className={styles.atlasSection}>
+        <div className={styles.atlasHeader}>
+          <div>
+            <div
+              className={styles.atlasKicker}
+              style={{ color: palette.inkSoft, fontFamily: displayFont.stack }}
+            >
+              Atlas · {racesForMap.length} races
+            </div>
+            <h2
+              className={styles.atlasTitle}
+              style={{ fontFamily: displayFont.stack, color: palette.ink }}
+            >
+              世界のレースを地図で探す
+            </h2>
+          </div>
+          <div
+            className={styles.atlasNote}
+            style={{ color: palette.inkSoft, fontFamily: '"Noto Serif JP", serif' }}
+          >
+            ピンにカーソルを合わせると概要 · クリックで詳細へ
+          </div>
+        </div>
+        <WorldMap races={racesForMap} palette={palette} displayFont={displayFont} height={500} />
+      </section>
 
       <SiteFooter palette={palette} displayFont={displayFont} />
     </div>
@@ -188,7 +225,7 @@ function FourSplitHero({
             </p>
           </div>
         </Link>
-        {[races[1], races[2]].filter(Boolean).map((r) => (
+        {races.slice(1).map((r) => (
           <Link key={r.slug} href={`/races/${r.slug}`} className={styles.fourSplitSide}>
             <div
               style={{

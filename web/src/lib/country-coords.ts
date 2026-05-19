@@ -13,6 +13,7 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   オーストラリア: [-23.5, 133.5],
   アメリカ合衆国: [36.5, -112.0],
   日本: [36.0, 138.0],
+  ケニア: [0.2, 36.9],
 };
 
 export function resolveCoords(

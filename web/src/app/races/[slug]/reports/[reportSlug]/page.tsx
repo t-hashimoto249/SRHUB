@@ -21,6 +21,7 @@ import { PurposeBadge } from "@/components/PurposeBadge";
 import { ReportCard } from "@/components/ReportCard";
 import { AttachmentList } from "@/components/AttachmentList";
 import { Gallery } from "@/components/Gallery";
+import { LikeButton } from "@/components/LikeButton";
 import type { Contact, ContactMethod } from "@/types/content";
 import styles from "./page.module.css";
 
@@ -95,6 +96,10 @@ export default async function ReportDetailPage({ params }: PageProps) {
           <span>
             {race.country} · {MONTH_LABELS[race.start_month]} {race.duration_days}d
           </span>
+        </div>
+
+        <div style={{ marginTop: 20 }}>
+          <LikeButton slug={report.slug} palette={palette} displayFont={displayFont} />
         </div>
       </section>
 
@@ -185,6 +190,20 @@ export default async function ReportDetailPage({ params }: PageProps) {
           }
           .report-body .report-media-photo img {
             background: ${palette.bgAlt};
+          }
+          .report-body .report-media-iframe-wrap {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #000;
+            border: 1px solid ${palette.rule};
+          }
+          .report-body .report-media-iframe-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
           }
           .report-body .report-media a {
             display: block;

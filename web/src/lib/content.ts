@@ -92,10 +92,43 @@ function escapeHtml(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+function toEmbedUrl(src: string): { embed: string; iframe: true } | null {
+  // Flickr の写真/動画ページ URL → 埋め込み URL（iframe で再生）
+  const flickrPhotoMatch = src.match(
+    /^https?:\/\/(?:www\.)?flickr\.com\/photos\/[^/]+\/(\d+)/i,
+  );
+  if (flickrPhotoMatch) {
+    return { embed: `https://embedr.flickr.com/photos/${flickrPhotoMatch[1]}`, iframe: true };
+  }
+  if (/^https?:\/\/embedr\.flickr\.com\//i.test(src)) {
+    return { embed: src, iframe: true };
+  }
+  // YouTube
+  const ytMatch = src.match(
+    /^https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/i,
+  );
+  if (ytMatch) {
+    return { embed: `https://www.youtube.com/embed/${ytMatch[1]}`, iframe: true };
+  }
+  return null;
+}
+
 function renderMediaHtml(kind: "動画" | "写真", src: string, caption: string): string {
   const safeSrc = escapeAttr(src);
   const safeCap = escapeHtml(caption);
   if (kind === "動画") {
+    const embed = toEmbedUrl(src);
+    if (embed) {
+      const safeEmbed = escapeAttr(embed.embed);
+      return (
+        `<figure class="report-media report-media-video report-media-iframe">` +
+        `<div class="report-media-iframe-wrap">` +
+        `<iframe src="${safeEmbed}" loading="lazy" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe>` +
+        `</div>` +
+        `<figcaption>${safeCap}</figcaption>` +
+        `</figure>`
+      );
+    }
     return (
       `<figure class="report-media report-media-video">` +
       `<video controls preload="metadata" playsinline>` +
@@ -120,6 +153,17 @@ function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+function parseMediaArg(rawPath: string): { src: string; caption: string | null } {
+  // 形式: "URL"（互換）または "URL | caption"
+  const pipeIdx = rawPath.indexOf("|");
+  if (pipeIdx === -1) {
+    return { src: rawPath.trim(), caption: null };
+  }
+  const src = rawPath.slice(0, pipeIdx).trim();
+  const cap = rawPath.slice(pipeIdx + 1).trim();
+  return { src, caption: cap.length > 0 ? cap : null };
+}
+
 function extractMediaMarkers(body: string): {
   body: string;
   replacements: Map<string, string>;
@@ -128,8 +172,9 @@ function extractMediaMarkers(body: string): {
   let i = 0;
   const out = body.replace(MEDIA_MARKER_RE, (_match, kind: string, rawPath: string) => {
     const token = `MEDIAPLACEHOLDER${i++}TOKEN`;
-    const src = normalizeMediaPath(rawPath);
-    const caption = captionFromPath(src);
+    const parsed = parseMediaArg(rawPath);
+    const src = normalizeMediaPath(parsed.src);
+    const caption = parsed.caption ?? captionFromPath(src);
     replacements.set(token, renderMediaHtml(kind as "動画" | "写真", src, caption));
     return token;
   });

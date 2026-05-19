@@ -63,7 +63,11 @@
       "Bash(md5 *)",
       "Read(//tmp/**)",
       "Bash(ps -p 97985 -o command=)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(find *)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(PORT=3877 npx next *)",
+      "Read(//private/tmp/**)"
     ]
   }
 }

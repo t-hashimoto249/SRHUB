@@ -103,15 +103,15 @@
 @media (min-width: 768px) {
   .fourSplitGrid {
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 360px 240px;
-    height: 612px;
+    grid-template-rows: repeat(3, 220px);
+    height: 672px;
   }
 }
 
 @media (min-width: 1024px) {
   .fourSplitGrid {
-    grid-template-rows: 420px 240px;
-    height: 672px;
+    grid-template-rows: repeat(3, 240px);
+    height: 732px;
   }
 }
 
@@ -125,7 +125,7 @@
 @media (min-width: 768px) {
   .fourSplitMain {
     aspect-ratio: auto;
-    grid-row: span 2;
+    grid-row: span 3;
   }
 }
 
@@ -183,8 +183,8 @@
 
 @media (min-width: 1024px) {
   .fieldGrid {
-    grid-template-columns: 180px 1fr 1fr 1fr;
-    gap: 32px;
+    grid-template-columns: 160px repeat(4, 1fr);
+    gap: 28px;
   }
 }
 
@@ -292,4 +292,50 @@
   font-size: 12px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+}
+
+.atlasSection {
+  padding: 0 var(--page-x) 80px;
+}
+
+@media (min-width: 768px) {
+  .atlasSection {
+    padding: 0 var(--page-x) 100px;
+  }
+}
+
+.atlasHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .atlasHeader {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+}
+
+.atlasKicker {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.atlasTitle {
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 600;
+  margin: 8px 0 0;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.atlasNote {
+  font-size: 11px;
 }

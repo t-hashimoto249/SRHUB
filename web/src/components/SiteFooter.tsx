@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mark } from "./Brand";
 import type { Palette, DisplayFont } from "./design-tokens";
+import { VisitorCounter } from "./VisitorCounter";
 import styles from "./SiteFooter.module.css";
 
 interface FooterItem {
@@ -99,6 +100,7 @@ export function SiteFooter({ palette, displayFont }: { palette: Palette; display
         style={{ color: palette.inkSoft, borderTop: `1px solid ${palette.rule}` }}
       >
         <span>© 2026 Stage Race Archive</span>
+        <VisitorCounter color={palette.inkSoft} />
         <span style={{ fontFamily: displayFont.stack, letterSpacing: "0.18em", textTransform: "uppercase" }}>
           Run · Endure · Return
         </span>
