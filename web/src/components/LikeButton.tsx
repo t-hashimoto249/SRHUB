@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import type { Palette, DisplayFont } from "./design-tokens";
 
 interface LikeResponse {
@@ -17,6 +17,30 @@ function todayUtc(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
+const likedListeners = new Set<() => void>();
+
+function subscribeLiked(callback: () => void) {
+  likedListeners.add(callback);
+  const onStorage = () => callback();
+  window.addEventListener("storage", onStorage);
+  return () => {
+    likedListeners.delete(callback);
+    window.removeEventListener("storage", onStorage);
+  };
+}
+
+function notifyLiked() {
+  likedListeners.forEach((l) => l());
+}
+
+function useLikedFromStorage(slug: string) {
+  return useSyncExternalStore(
+    subscribeLiked,
+    () => localStorage.getItem(localKey(slug, todayUtc())) === "1",
+    () => false,
+  );
+}
+
 export function LikeButton({
   slug,
   palette,
@@ -27,12 +51,10 @@ export function LikeButton({
   displayFont: DisplayFont;
 }) {
   const [total, setTotal] = useState<number | null>(null);
-  const [liked, setLiked] = useState(false);
+  const liked = useLikedFromStorage(slug);
   const [pending, setPending] = useState(false);
 
   useEffect(() => {
-    setLiked(localStorage.getItem(localKey(slug, todayUtc())) === "1");
-
     const controller = new AbortController();
     (async () => {
       try {
@@ -59,8 +81,8 @@ export function LikeButton({
       if (!res.ok) return;
       const data = (await res.json()) as LikeResponse;
       setTotal(data.total);
-      setLiked(true);
       localStorage.setItem(localKey(slug, todayUtc()), "1");
+      notifyLiked();
     } catch {
       // ignore
     } finally {
