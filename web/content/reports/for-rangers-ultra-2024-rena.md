@@ -123,8 +123,6 @@ attachments:
 
 ### Day 0：ナイロビ到着 — 2024.8.30
 
-> 原典: [For Rangers Ultra 2024 / ナイロビ到着（Day 0）](https://note.com/rena_fr/n/n05fa24718779)（2025-03-20 公開）
-
 朝焼けに染まるアフリカの大地。広がるサバンナの草原を駆け抜ける先に、シマウマやキリンが静かに佇む。そんな光景の中を、自分の足で走る贅沢を味わう。人生で一度は体験したい、そんな夢が今、現実になろうとしている。
 
 深夜にドーハを飛び立ってから約6時間後、現地時間の早朝にナイロビに到着する。フライトスケジュールを直前まで勘違いしていた。ドーハでまさかのほぼ丸1日のトランジット時間を経て着いたものだから、まるでマラソンのラストスパートを間違えて、ゴールラインが遠ざかるような感覚だった。
@@ -178,8 +176,6 @@ attachments:
 [写真: https://live.staticflickr.com/65535/53991942178_440ff9e41e_b.jpg | キャンプ地へ移動]
 
 ### Day 1：レワ野生生物保護区 — 37km / 獲得標高 787m / 8:00 スタート
-
-> 原典: [For Rangers Ultra 2024 / Day 1：レワ野生生物保護区（37km）](https://note.com/rena_fr/n/nd23275d2c45a)（2025-03-21 公開）
 
 [写真: https://assets.st-note.com/production/uploads/images/134792910/picture_pc_682820ca25d3fd3cca69151f7fb1bda7.png | Day 1 コースマップ]
 
@@ -283,8 +279,6 @@ CP3 へ向かう道中でビデオ撮影をする。
 
 ### Day 3：ロルダイガ — 48km / 獲得標高 913m / 6:45 スタート
 
-> 原典: [For Rangers Ultra 2024 / Day 3：ロルダイガ（48km）](https://note.com/rena_fr/n/n1f0506759a61)（2025-09-03 公開）
-
 [写真: https://assets.st-note.com/production/uploads/images/134793062/picture_pc_9cec9e928209c3dd3fa051148a199b78.png | Day 3 コースマップ]
 
 レース3日目。今日も2回に分けてのウェーブスタートで、私は前半のスタートグループとなった。その前に、レースディレクターのクリスから説明があり、レース中ずっと私たちを警備してくれていたレンジャーたちが、このタイミングでシフト交代するとのことだった。
@@ -351,8 +345,6 @@ CP3 へ向かう道中でビデオ撮影をする。
 
 ### Day 4：オル・ジョギ — 43km / 獲得標高 517m / 6:45 スタート
 
-> 原典: [For Rangers Ultra 2024 / Day 4：オルジョギ（43km）](https://note.com/rena_fr/n/n11582f50c3f4)（2025-09-04 公開）
-
 [写真: https://assets.st-note.com/production/uploads/images/134793133/picture_pc_0415bca8855978ae28b22d05604eb928.png | Day 4 コースマップ]
 
 この日もウェーブスタートで、当然のごとく前半グループに組み込まれたワタクシ。
@@ -410,8 +402,6 @@ CP3 へ向かう道中でビデオ撮影をする。
 って、感じでレース4日目が終了。いよいよ明日で最後だ。
 
 ### Day 5：オル・ペジェタ — 45km / 獲得標高 417m / 6:45 スタート
-
-> 原典: [For Rangers Ultra 2024 / Day 5：オルペジェタ（45km）](https://note.com/rena_fr/n/n0e01e9ba6577)（2025-09-05 公開）
 
 [写真: https://assets.st-note.com/production/uploads/images/134793278/picture_pc_e12460d042af727e6d35301637bd975f.png | Day 5 コースマップ]
 
