@@ -12,17 +12,9 @@ attachments:
     url: https://note.com/rena_fr/m/m98a4df7f8b43
     kind: other
     description: Rena 氏による全記事まとめ（レース概要、出発前、Day 0〜Day 5）
-  - title: Justgiving 募金ページ（レンジャー支援）
-    url: https://www.justgiving.com/page/rena-forrangers2024
-    kind: other
-    description: 著者が立ち上げたレンジャー支援募金ページ
-  - title: Flickr 写真アルバム（renamucci）
-    url: https://www.flickr.com/photos/renamucci/
-    kind: photos
-    description: レース現地の写真・動画
 ---
 
-> 出典：本レポートは note.com の Rena 氏（[@rena_fr](https://note.com/rena_fr)）執筆のマガジン「[For Rangers Ultra 2024](https://note.com/rena_fr/m/m98a4df7f8b43)」を、著者の許諾を得て転記しています。各セクション冒頭に原典 note 記事へのリンクを記載しています。再利用時は必ず原典 URL と著者名を併記してください。写真・動画はすべて著者の Flickr アカウント（[renamucci](https://www.flickr.com/photos/renamucci/)）からの埋め込みです。
+> 出典：本レポートは note.com の Rena 氏（[@rena_fr](https://note.com/rena_fr)）執筆のマガジン「[For Rangers Ultra 2024](https://note.com/rena_fr/m/m98a4df7f8b43)」を、著者の許諾を得て転記しています。各セクション冒頭に原典 note 記事へのリンクを記載しています。再利用時は必ず原典 URL と著者名を併記してください。
 
 ## 練習・準備
 
@@ -60,8 +52,6 @@ attachments:
 そんな私たちランナーの安全を守ってくれるのが「レンジャー」です。彼らは、サイの角や象の象牙などの野生動物からの生産物の数十億ドル規模の違法取引から、アフリカの絶滅危惧種を守るため、日々命をかけて活動する勇敢な方々です。レンジャーはレース中、私たちを見守り、安全を確保してくれます。
 
 このレース主催者は、レンジャーがさらされている危険や苦難に注目を集めるため、このような過酷なレースを開催し、レンジャーたちの福祉に直接必要な資金を集めようとしています。
-
-日本からの参加者の皆さんも是非協力してほしいという話があったことと、私自身もその趣旨に賛同したので、Justgiving のサイトで [募金のページ](https://www.justgiving.com/page/rena-forrangers2024) を立ち上げました。
 
 このレースで得た収益と、参加者が募金活動で集めた資金は、支援団体がサポートする2,500人のレンジャーに全額寄付されます。野外での生活をより快適にするための基本的な装備品や、彼らの子供たちの教育機会、そして2003年以降アフリカ全土で1,000人以上のレンジャーが殉職していることから、最悪の事態が起こった場合のレンジャーの家族の福祉に使われるとのことです。
 
@@ -494,5 +484,3 @@ CP3 へ向かう道中でビデオ撮影をする。
 - **ナイロビ市内の治安は本当に悪い**。移動は必ず車、建物の入口まで横付け、ホテルの数百メートル先でも徒歩は避ける
 
 ---
-
-> 本レポートは Rena 氏（note: [@rena_fr](https://note.com/rena_fr)）が執筆した [For Rangers Ultra 2024 マガジン](https://note.com/rena_fr/m/m98a4df7f8b43) を、著者の許諾のもとに転記したものです。写真・動画は著者の Flickr アカウント [renamucci](https://www.flickr.com/photos/renamucci/) からの埋め込みです。各セクション冒頭の「原典」リンクから note 原文（写真・動画の元キャプション付き）を参照いただけます。
