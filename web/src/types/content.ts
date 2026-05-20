@@ -50,6 +50,13 @@ export interface GearEntry {
   note?: string;         // 補足説明
 }
 
+export interface RaceEdition {
+  year: number;
+  country: string;
+  note?: string;
+  coords?: [number, number];       // 任意：[lat, lng]。未指定時は country から自動解決
+}
+
 export interface RaceFrontmatter {
   title: string;
   title_en?: string;
@@ -74,6 +81,7 @@ export interface RaceFrontmatter {
   schedule?: ScheduleEntry[];
   entry_flow?: string;
   videos?: RaceVideo[];
+  editions?: RaceEdition[];        // 年ごとの開催地履歴（開催地が変わるレース向け）
 }
 
 export interface Race extends Omit<RaceFrontmatter, "gear"> {

@@ -29,14 +29,19 @@ export default async function ReportListPage() {
     return rest;
   });
 
-  const racesForClient = races.map(({ slug, title, title_en, country, continent, start_month }) => ({
-    slug,
-    title,
-    title_en,
-    country,
-    continent,
-    start_month,
-  }));
+  const racesForClient = races.map(
+    ({ slug, title, title_en, country, continent, start_month, editions }) => ({
+      slug,
+      title,
+      title_en,
+      country,
+      continent,
+      start_month,
+      edition_countries: editions
+        ? Array.from(new Set(editions.map((e) => e.country).filter(Boolean)))
+        : undefined,
+    }),
+  );
 
   const contributorsForClient = contributors.map(({ id, name, avatar }) => ({
     id,

@@ -22,6 +22,7 @@ interface RaceLite {
   country: string;
   continent: string;
   start_month: number;
+  edition_countries?: string[];
 }
 
 interface ContributorLite {
@@ -185,6 +186,7 @@ export function ReportListExplorer({
           race?.title,
           race?.title_en,
           race?.country,
+          ...(race?.edition_countries ?? []),
           contrib?.name,
         ]
           .filter(Boolean)

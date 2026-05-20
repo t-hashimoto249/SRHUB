@@ -106,11 +106,20 @@ export function WorldMap({
   const byCountry = useMemo(() => {
     const m: Record<string, CountryGroup> = {};
     races.forEach((r) => {
-      const coords = resolveCoords(r.country, r.coords);
-      if (!coords) return;
-      const key = r.country;
-      if (!m[key]) m[key] = { country: r.country, coords, races: [] };
-      m[key].races.push(r);
+      const countries = new Set<string>([r.country]);
+      for (const e of r.editions ?? []) {
+        if (e.country) countries.add(e.country);
+      }
+      for (const country of countries) {
+        const override =
+          country === r.country
+            ? r.coords
+            : r.editions?.find((e) => e.country === country)?.coords;
+        const coords = resolveCoords(country, override);
+        if (!coords) continue;
+        if (!m[country]) m[country] = { country, coords, races: [] };
+        m[country].races.push(r);
+      }
     });
     return Object.values(m);
   }, [races]);

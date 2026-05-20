@@ -134,6 +134,73 @@ function ChapterOverview({
           style={{ marginTop: 28, fontSize: 14, lineHeight: 1.95, color: palette.ink }}
           dangerouslySetInnerHTML={{ __html: race.contentHtml }}
         />
+        {race.editions?.length ? (
+          <div style={{ marginTop: 40 }}>
+            <div
+              style={{
+                fontFamily: "ui-monospace, monospace",
+                fontSize: 10,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: palette.inkSoft,
+                marginBottom: 16,
+              }}
+            >
+              Editions · 開催地履歴
+            </div>
+            <ul
+              style={{
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+                borderTop: `1px solid ${palette.rule}`,
+              }}
+            >
+              {race.editions
+                .slice()
+                .sort((a, b) => b.year - a.year)
+                .map((e) => (
+                  <li
+                    key={`${e.year}-${e.country}`}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "80px 1fr",
+                      gap: 16,
+                      padding: "12px 0",
+                      borderBottom: `1px solid ${palette.rule}`,
+                      alignItems: "baseline",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: displayFont.stack,
+                        fontSize: 18,
+                        fontWeight: 600,
+                        color: palette.accent,
+                      }}
+                    >
+                      {e.year}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: '"Noto Sans JP", sans-serif',
+                        fontSize: 14,
+                        color: palette.ink,
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      {e.country}
+                      {e.note ? (
+                        <span style={{ marginLeft: 10, color: palette.inkSoft, fontSize: 12 }}>
+                          — {e.note}
+                        </span>
+                      ) : null}
+                    </span>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
       <div>
         <div
