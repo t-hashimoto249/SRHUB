@@ -31,7 +31,17 @@ export default async function HomePage() {
   const featured = FEATURED_SLUGS
     .map((slug) => races.find((r) => r.slug === slug))
     .filter((r): r is Race => Boolean(r));
-  const latestReports = reports.slice(0, 4);
+  const FEATURED_REPORT_SLUGS = [
+    "the-coastal-challenge-2023-tk-hashimoto",
+    "for-rangers-ultra-2024-rena",
+  ];
+  const featuredReports = FEATURED_REPORT_SLUGS
+    .map((slug) => reports.find((r) => r.slug === slug))
+    .filter((r): r is Report => Boolean(r));
+  const latestReports = [
+    ...featuredReports,
+    ...reports.filter((r) => !FEATURED_REPORT_SLUGS.includes(r.slug)),
+  ].slice(0, 8);
   const contributorMap = new Map(contributors.map((c) => [c.id, c]));
   const racesForMap = races.map((race) => {
     const { contentHtml: _contentHtml, ...rest } = race;
@@ -80,7 +90,7 @@ export default async function HomePage() {
       {latestReports.length > 0 && (
         <section className={styles.fieldSection}>
           <div className={styles.fieldGrid} style={{ borderTop: `1px solid ${palette.rule}` }}>
-            <div>
+            <div className={styles.fieldLabelCell}>
               <div className={styles.fieldLabel} style={{ fontFamily: displayFont.stack, color: palette.inkSoft }}>
                 From
                 <br />

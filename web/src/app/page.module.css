@@ -195,6 +195,13 @@
   line-height: 1.6;
 }
 
+@media (min-width: 1024px) {
+  .fieldLabelCell {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+}
+
 .exploreSection {
   padding: 0 var(--page-x) 80px;
 }
