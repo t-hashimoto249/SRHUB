@@ -14,7 +14,7 @@ difficulty: 5
 support: self
 organizer: Tess and Colin Geddes
 official_url: https://g2gultra.com/
-hero_image: /images/races/grand-to-grand-ultra.jpg
+hero_image: /images/races/grand-to-grand-ultra.png
 summary: アメリカ・グランドキャニオン北縁から始まる、6ステージ275kmのセルフサポート式ステージレース。コロラド高原の高地砂漠を縦断する。
 videos: []
 ---

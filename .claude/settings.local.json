@@ -76,7 +76,8 @@
       "Bash(tee /tmp/tsc.log)",
       "Bash(echo \"---exit: $?\")",
       "Bash(tee /tmp/dev.log)",
-      "Bash(kill 72082)"
+      "Bash(kill 72082)",
+      "Bash(xargs ls -la)"
     ]
   }
 }
