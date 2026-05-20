@@ -4,7 +4,7 @@ slug: mds-cappadocia-tomomi
 race_slug: mds-cappadocia
 contributor: tomomi
 date: 1900-01-01
-purpose: personal
+purpose: competitive
 hero_image: /images/races/mds-cappadocia.jpg
 summary: Tomomi による MDS Cappadocia の参加記録。本レポートは YouTube 動画のみで構成されています。
 gallery:

@@ -4,7 +4,7 @@ slug: grand-to-grand-ultra-tomomi
 race_slug: grand-to-grand-ultra
 contributor: tomomi
 date: 1900-01-01
-purpose: personal
+purpose: competitive
 hero_image: /images/races/grand-to-grand-ultra.jpg
 summary: Tomomi による Grand To Grand Ultra の参加記録。本レポートは YouTube 動画のみで構成されています。
 gallery:

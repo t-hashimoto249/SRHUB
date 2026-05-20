@@ -4,7 +4,7 @@ slug: everest-trail-race-tomomi
 race_slug: everest-trail-race
 contributor: tomomi
 date: 1900-01-01
-purpose: personal
+purpose: competitive
 hero_image: /images/races/everest-trail-race.jpg
 summary: Tomomi による Everest Trail Race の参加記録。本レポートは YouTube 動画のみで構成されています。
 gallery:

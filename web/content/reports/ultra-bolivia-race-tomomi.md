@@ -4,7 +4,7 @@ slug: ultra-bolivia-race-tomomi
 race_slug: ultra-bolivia-race
 contributor: tomomi
 date: 1900-01-01
-purpose: personal
+purpose: competitive
 hero_image: /images/reports/ultra-bolivia-race-tomomi.jpg
 summary: Tomomi による Ultra Bolivia Race の参加記録。本レポートは YouTube 動画のみで構成されています。
 gallery:

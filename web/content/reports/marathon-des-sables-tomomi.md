@@ -4,7 +4,7 @@ slug: marathon-des-sables-tomomi
 race_slug: marathon-des-sables
 contributor: tomomi
 date: 1900-01-01
-purpose: personal
+purpose: competitive
 hero_image: /images/races/marathon-des-sables.jpg
 summary: Tomomi による Marathon Des Sables の参加記録。本レポートは YouTube 動画のみで構成されています。
 gallery:

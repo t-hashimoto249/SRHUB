@@ -4,7 +4,7 @@ slug: trans-sahara-marathon-tomomi
 race_slug: trans-sahara-marathon
 contributor: tomomi
 date: 2024-01-01
-purpose: personal
+purpose: competitive
 hero_image: /images/races/trans-sahara-marathon.jpg
 summary: Tomomi による 2024 年 Trans Sahara Marathon の参加記録。本レポートは YouTube 動画のみで構成されています。
 gallery:

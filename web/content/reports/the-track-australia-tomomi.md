@@ -4,7 +4,7 @@ slug: the-track-australia-tomomi
 race_slug: the-track-australia
 contributor: tomomi
 date: 1900-01-01
-purpose: personal
+purpose: competitive
 hero_image: /images/races/the-track-australia.jpg
 summary: Tomomi による The Track Australia の参加記録。本レポートは YouTube 動画のみで構成されています。
 gallery:

@@ -4,7 +4,7 @@ slug: mongolia-trail-run-tomomi
 race_slug: mongolia-trail-run
 contributor: tomomi
 date: 1900-01-01
-purpose: personal
+purpose: competitive
 hero_image: /images/reports/mongolia-trail-run-tomomi.jpg
 summary: Tomomi による Mongolia Trail Run の参加記録。本レポートは YouTube 動画のみで構成されています。
 gallery:

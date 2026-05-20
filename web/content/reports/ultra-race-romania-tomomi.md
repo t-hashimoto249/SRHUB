@@ -4,7 +4,7 @@ slug: ultra-race-romania-tomomi
 race_slug: ultra-race-romania
 contributor: tomomi
 date: 1900-01-01
-purpose: personal
+purpose: competitive
 hero_image: /images/races/ultra-race-romania.jpg
 summary: Tomomi による Ultra Race Romania の参加記録。本レポートは YouTube 動画のみで構成されています。
 gallery:

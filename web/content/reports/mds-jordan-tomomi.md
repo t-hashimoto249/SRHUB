@@ -4,7 +4,7 @@ slug: mds-jordan-tomomi
 race_slug: mds-jordan
 contributor: tomomi
 date: 1900-01-01
-purpose: personal
+purpose: competitive
 hero_image: /images/races/mds-jordan.jpg
 summary: Tomomi による MDS Jordan の参加記録。本レポートは YouTube 動画のみで構成されています。
 gallery:
