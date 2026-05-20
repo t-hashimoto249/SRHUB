@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import type { Race, Report } from "@/types/content";
 import { MONTH_LABELS, type Palette, type DisplayFont } from "./design-tokens";
@@ -14,11 +15,13 @@ export function RaceDetailChapters({
   reports,
   palette,
   displayFont,
+  organizerId,
 }: {
   race: Race;
   reports: Report[];
   palette: Palette;
   displayFont: DisplayFont;
+  organizerId?: string | null;
 }) {
   const [section, setSection] = useState<SectionId>("overview");
   const sections: { id: SectionId; label: string; n: string; available: boolean }[] = [
@@ -78,7 +81,14 @@ export function RaceDetailChapters({
       </nav>
 
       <section className={styles.section}>
-        {section === "overview" && <ChapterOverview race={race} palette={palette} displayFont={displayFont} />}
+        {section === "overview" && (
+          <ChapterOverview
+            race={race}
+            palette={palette}
+            displayFont={displayFont}
+            organizerId={organizerId}
+          />
+        )}
         {section === "schedule" && <ChapterSchedule race={race} palette={palette} displayFont={displayFont} />}
         {section === "gear" && <ChapterGear race={race} palette={palette} displayFont={displayFont} />}
         {section === "entry" && <ChapterEntry race={race} palette={palette} displayFont={displayFont} />}
@@ -95,10 +105,12 @@ function ChapterOverview({
   race,
   palette,
   displayFont,
+  organizerId,
 }: {
   race: Race;
   palette: Palette;
   displayFont: DisplayFont;
+  organizerId?: string | null;
 }) {
   return (
     <div className={styles.overviewGrid}>
@@ -139,7 +151,20 @@ function ChapterOverview({
         <dl style={{ margin: 0, display: "flex", flexDirection: "column", gap: 14 }}>
           {([
             ["Difficulty", <span key="d" style={{ color: palette.accent }}><Stars n={race.difficulty} /></span>],
-            ["Organizer", race.organizer],
+            [
+              "Organizer",
+              organizerId ? (
+                <Link
+                  key="org"
+                  href={`/organizers/${organizerId}`}
+                  style={{ color: palette.accentDeep, textDecoration: "underline" }}
+                >
+                  {race.organizer}
+                </Link>
+              ) : (
+                race.organizer || "—"
+              ),
+            ],
             ["Participants", race.participants_approx ? `~${race.participants_approx} people` : "—"],
             [
               "Entry fee",

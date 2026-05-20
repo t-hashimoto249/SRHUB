@@ -70,7 +70,13 @@
       "Read(//private/tmp/**)",
       "Bash(echo \"EXIT=$?\")",
       "Bash(node *)",
-      "WebFetch(domain:marathondessables.com)"
+      "WebFetch(domain:marathondessables.com)",
+      "Bash(awk -F': ' '{print $2}')",
+      "Bash(awk *)",
+      "Bash(tee /tmp/tsc.log)",
+      "Bash(echo \"---exit: $?\")",
+      "Bash(tee /tmp/dev.log)",
+      "Bash(kill 72082)"
     ]
   }
 }

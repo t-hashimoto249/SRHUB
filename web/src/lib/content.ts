@@ -14,6 +14,8 @@ import type {
   GearEntry,
   Partner,
   PartnerFrontmatter,
+  Organizer,
+  OrganizerFrontmatter,
 } from "@/types/content";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
@@ -332,4 +334,56 @@ export async function getAllPartners(): Promise<Partner[]> {
     if (a.category !== b.category) return a.category.localeCompare(b.category, "ja");
     return a.name.localeCompare(b.name, "ja");
   });
+}
+
+export async function getAllOrganizers(): Promise<Organizer[]> {
+  const dir = path.join(CONTENT_DIR, "organizers");
+  let files: string[];
+  try {
+    files = await listMarkdownFiles(dir);
+  } catch {
+    return [];
+  }
+  const organizers = await Promise.all(
+    files.map(async (file) => {
+      const { data, body } = await readMarkdown<OrganizerFrontmatter>(path.join(dir, file));
+      const contentHtml = await renderMarkdown(body);
+      return { ...data, contentHtml };
+    }),
+  );
+  return organizers.sort((a, b) => a.name.localeCompare(b.name, "ja"));
+}
+
+export async function getOrganizerById(id: string): Promise<Organizer | null> {
+  const organizers = await getAllOrganizers();
+  return organizers.find((o) => o.id === id) ?? null;
+}
+
+/** race.organizer 文字列を Organizer に解決する。name / aliases / id の順で照合 */
+export function resolveOrganizerForRace(
+  race: { organizer: string },
+  organizers: Organizer[],
+): Organizer | null {
+  const raw = race.organizer?.trim();
+  if (!raw) return null;
+  return (
+    organizers.find((o) => o.name === raw) ??
+    organizers.find((o) => o.aliases?.includes(raw)) ??
+    organizers.find((o) => o.id === raw) ??
+    null
+  );
+}
+
+/** 1 主催者あたりのレース数を集計（id をキーに件数） */
+export function countRacesByOrganizer(
+  races: { organizer: string }[],
+  organizers: Organizer[],
+): Map<string, number> {
+  const counts = new Map<string, number>();
+  for (const race of races) {
+    const org = resolveOrganizerForRace(race, organizers);
+    if (!org) continue;
+    counts.set(org.id, (counts.get(org.id) ?? 0) + 1);
+  }
+  return counts;
 }

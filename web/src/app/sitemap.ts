@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllRaces, getAllReports } from "@/lib/content";
+import { getAllRaces, getAllReports, getAllOrganizers } from "@/lib/content";
 import { getSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-static";
@@ -13,11 +13,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/about", priority: 0.8 },
     { path: "/disclosure", priority: 0.5 },
     { path: "/partners", priority: 0.6 },
+    { path: "/organizers", priority: 0.7 },
     { path: "/races", priority: 0.9 },
     { path: "/reports", priority: 0.8 },
   ];
 
-  const [races, reports] = await Promise.all([getAllRaces(), getAllReports()]);
+  const [races, reports, organizers] = await Promise.all([
+    getAllRaces(),
+    getAllReports(),
+    getAllOrganizers(),
+  ]);
 
   return [
     ...staticPaths.map(({ path, priority }) => ({
@@ -31,6 +36,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.7,
+    })),
+    ...organizers.map((o) => ({
+      url: `${base}/organizers/${o.id}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
     ...reports
       .filter((rep) => rep.race_slug && rep.slug)

@@ -174,3 +174,19 @@ export interface PartnerFrontmatter {
 export interface Partner extends PartnerFrontmatter {
   contentHtml: string;
 }
+
+export interface OrganizerFrontmatter {
+  id: string;                // URL スラッグ・ファイル名と一致
+  name: string;              // 表示名（race.organizer 文字列の主表記と一致）
+  name_en?: string;          // 英語表記（任意）
+  aliases?: string[];        // race.organizer に他の表記が存在する場合の別名
+  url?: string;              // 公式サイト URL
+  country?: string;          // 主な拠点国
+  founded?: number;          // 設立年（任意）
+  logo?: string;             // ロゴ画像パス
+  summary?: string;          // 一覧で使う 1〜2 行の説明
+}
+
+export interface Organizer extends OrganizerFrontmatter {
+  contentHtml: string;
+}

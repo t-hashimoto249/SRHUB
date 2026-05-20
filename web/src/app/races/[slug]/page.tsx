@@ -1,5 +1,11 @@
 import { notFound } from "next/navigation";
-import { getAllRaces, getRaceBySlug, getReportsByRace } from "@/lib/content";
+import {
+  getAllRaces,
+  getRaceBySlug,
+  getReportsByRace,
+  getAllOrganizers,
+  resolveOrganizerForRace,
+} from "@/lib/content";
 import {
   PALETTES,
   DISPLAY_FONTS,
@@ -27,7 +33,11 @@ export default async function RaceDetailPage({ params }: RaceDetailPageProps) {
   const race = await getRaceBySlug(slug);
   if (!race) notFound();
 
-  const reports = await getReportsByRace(slug);
+  const [reports, organizers] = await Promise.all([
+    getReportsByRace(slug),
+    getAllOrganizers(),
+  ]);
+  const organizerId = resolveOrganizerForRace(race, organizers)?.id ?? null;
   const palette = PALETTES[SELECTED_PALETTE_KEY];
   const displayFont = DISPLAY_FONTS[SELECTED_FONT_KEY];
 
@@ -74,7 +84,13 @@ export default async function RaceDetailPage({ params }: RaceDetailPageProps) {
       </section>
 
       {/* チャプターナビ + チャプター本体（クライアントコンポーネント） */}
-      <RaceDetailChapters race={race} reports={reports} palette={palette} displayFont={displayFont} />
+      <RaceDetailChapters
+        race={race}
+        reports={reports}
+        palette={palette}
+        displayFont={displayFont}
+        organizerId={organizerId}
+      />
 
       {/* CTA */}
       <section

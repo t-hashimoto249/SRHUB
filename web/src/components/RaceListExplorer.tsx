@@ -3,6 +3,14 @@
 import Link from "next/link";
 import { useMemo, useState, type ReactNode } from "react";
 import type { Continent, RaceListItem, SupportType, Terrain } from "@/types/content";
+
+export interface OrganizerOption {
+  id: string;
+  name: string;
+  count: number;
+}
+
+export type RaceListItemWithOrganizer = RaceListItem & { organizer_id?: string | null };
 import type { DisplayFont, Palette } from "./design-tokens";
 import { MONTH_LABELS } from "./design-tokens";
 import { SiteHeader } from "./SiteHeader";
@@ -378,11 +386,13 @@ function RaceCard({
 
 export function RaceListExplorer({
   races,
+  organizerOptions = [],
   palette,
   displayFont,
   cardStyle = "overlay",
 }: {
-  races: RaceListItem[];
+  races: RaceListItemWithOrganizer[];
+  organizerOptions?: OrganizerOption[];
   palette: Palette;
   displayFont: DisplayFont;
   cardStyle?: CardStyle;
@@ -393,6 +403,7 @@ export function RaceListExplorer({
   const [distance, setDistance] = useState<DistanceBin>("all");
   const [months, setMonths] = useState<number[]>([]);
   const [support, setSupport] = useState<SupportType | "all">("all");
+  const [organizers, setOrganizers] = useState<string[]>([]);
   const [filterOpen, setFilterOpen] = useState(false);
 
   const activeFilterCount =
@@ -401,7 +412,8 @@ export function RaceListExplorer({
     (terrains.length ? 1 : 0) +
     (distance !== "all" ? 1 : 0) +
     (months.length ? 1 : 0) +
-    (support !== "all" ? 1 : 0);
+    (support !== "all" ? 1 : 0) +
+    (organizers.length ? 1 : 0);
 
   const filtered = useMemo(() => {
     const distanceTest = DISTANCE_BINS.find((b) => b.key === distance)!.test;
@@ -412,10 +424,11 @@ export function RaceListExplorer({
       if (!distanceTest(r.distance_km)) return false;
       if (months.length && !months.includes(r.start_month)) return false;
       if (support !== "all" && r.support !== support) return false;
+      if (organizers.length && (!r.organizer_id || !organizers.includes(r.organizer_id))) return false;
       return true;
     });
     return out.sort((a, b) => b.difficulty - a.difficulty);
-  }, [races, continent, difficulty, terrains, distance, months, support]);
+  }, [races, continent, difficulty, terrains, distance, months, support, organizers]);
 
   return (
     <div style={{ background: palette.bg, color: palette.ink, fontFamily: '"Noto Sans JP", sans-serif' }}>
@@ -567,6 +580,24 @@ export function RaceListExplorer({
               />
             ))}
           </FilterGroup>
+          {organizerOptions.length > 0 && (
+            <FilterGroup label="Organizer" palette={palette} displayFont={displayFont}>
+              {organizerOptions.map((o) => (
+                <FilterChip
+                  key={o.id}
+                  label={`${o.name} (${o.count})`}
+                  active={organizers.includes(o.id)}
+                  onClick={() =>
+                    setOrganizers((s) =>
+                      s.includes(o.id) ? s.filter((x) => x !== o.id) : [...s, o.id],
+                    )
+                  }
+                  palette={palette}
+                  displayFont={displayFont}
+                />
+              ))}
+            </FilterGroup>
+          )}
             </div>
           </div>
         </aside>
