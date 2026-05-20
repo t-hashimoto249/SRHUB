@@ -67,7 +67,10 @@
       "Bash(find *)",
       "Bash(echo \"EXIT: $?\")",
       "Bash(PORT=3877 npx next *)",
-      "Read(//private/tmp/**)"
+      "Read(//private/tmp/**)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(node *)",
+      "WebFetch(domain:marathondessables.com)"
     ]
   }
 }
