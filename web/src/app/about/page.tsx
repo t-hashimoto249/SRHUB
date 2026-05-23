@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getAllContributors } from "@/lib/content";
 import {
   PALETTES,
@@ -186,7 +187,8 @@ export default async function AboutPage() {
             Share your report.
           </div>
         </div>
-        <a
+        <Link
+          href="/contact"
           className={styles.ctaButton}
           style={{
             border: `1px solid ${palette.bg}`,
@@ -195,7 +197,7 @@ export default async function AboutPage() {
           }}
         >
           Contact Editorial →
-        </a>
+        </Link>
       </section>
 
       <SiteFooter palette={palette} displayFont={displayFont} />

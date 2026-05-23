@@ -1,0 +1,191 @@
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  padding-top: 28px;
+}
+
+@media (min-width: 768px) {
+  .formGrid {
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    padding-top: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .formGrid {
+    grid-template-columns: 1fr 1.6fr;
+    gap: 72px;
+    padding-top: 48px;
+  }
+}
+
+.sectionLabel {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.intro {
+  font-family: "Noto Serif JP", serif;
+  font-size: 15px;
+  line-height: 1.95;
+  margin: 16px 0 0;
+}
+
+@media (min-width: 768px) {
+  .intro {
+    font-size: 16px;
+  }
+}
+
+.metaList {
+  margin-top: 28px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.metaList li {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 8px;
+}
+
+.metaKey {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.required {
+  margin-left: 6px;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  padding: 10px 0;
+  font: inherit;
+  font-size: 15px;
+  color: inherit;
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-bottom-width: 2px;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 180px;
+  line-height: 1.7;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+  margin-top: 8px;
+}
+
+@media (min-width: 640px) {
+  .actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.submit {
+  padding: 14px 26px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status {
+  font-size: 12px;
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+}
+
+.statusOk {
+  border-left: 3px solid currentColor;
+  padding: 14px 16px;
+}
+
+.statusError {
+  padding: 14px 16px;
+  border-left: 3px solid currentColor;
+}
+
+.success {
+  padding: 28px 24px;
+  border: 1px solid currentColor;
+}
+
+.successTitle {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  margin: 0 0 12px;
+  font-size: clamp(20px, 3vw, 28px);
+}
+
+.successBody {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.9;
+  font-family: "Noto Serif JP", serif;
+}

@@ -53,6 +53,7 @@ export function SiteFooter({ palette, displayFont }: { palette: Palette; display
               h: "About",
               items: [
                 { label: "このサイトについて", href: "/about" } as FooterItem,
+                { label: "Contact", href: "/contact" } as FooterItem,
                 { label: "Disclosure", href: "/disclosure" } as FooterItem,
               ],
             },
