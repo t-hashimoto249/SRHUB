@@ -22,6 +22,7 @@ import { ReportCard } from "@/components/ReportCard";
 import { AttachmentList } from "@/components/AttachmentList";
 import { Gallery } from "@/components/Gallery";
 import { LikeButton } from "@/components/LikeButton";
+import { PvPing } from "@/components/PvPing";
 import type { Contact, ContactMethod } from "@/types/content";
 import styles from "./page.module.css";
 
@@ -66,6 +67,7 @@ export default async function ReportDetailPage({ params }: PageProps) {
 
   return (
     <div style={{ background: palette.bg, color: palette.ink, fontFamily: '"Noto Sans JP", sans-serif' }}>
+      <PvPing scope="report" id={report.slug} />
       <SiteHeader palette={palette} displayFont={displayFont} variant="A" current="races" />
 
       {/* タイトルブロック */}
@@ -99,7 +101,7 @@ export default async function ReportDetailPage({ params }: PageProps) {
         </div>
 
         <div style={{ marginTop: 20 }}>
-          <LikeButton slug={report.slug} palette={palette} displayFont={displayFont} />
+          <LikeButton scope="report" id={report.slug} palette={palette} displayFont={displayFont} />
         </div>
       </section>
 

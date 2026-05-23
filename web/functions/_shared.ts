@@ -45,3 +45,50 @@ export async function incrementCount(kv: KVNamespace, key: string): Promise<numb
 export function todayUtc(): string {
   return new Date().toISOString().slice(0, 10);
 }
+
+export function monthUtc(): string {
+  return new Date().toISOString().slice(0, 7);
+}
+
+export const COUNTER_KINDS = ["pv", "like"] as const;
+export type CounterKind = (typeof COUNTER_KINDS)[number];
+
+export const COUNTER_SCOPES = ["organizer", "race", "report"] as const;
+export type CounterScope = (typeof COUNTER_SCOPES)[number];
+
+// Slug/id charset — accepts letters, digits, dashes, underscores, dots.
+const COUNTER_ID_RE = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/;
+
+export function isCounterKind(v: unknown): v is CounterKind {
+  return typeof v === "string" && (COUNTER_KINDS as readonly string[]).includes(v);
+}
+
+export function isCounterScope(v: unknown): v is CounterScope {
+  return typeof v === "string" && (COUNTER_SCOPES as readonly string[]).includes(v);
+}
+
+export function isCounterId(v: unknown): v is string {
+  return typeof v === "string" && COUNTER_ID_RE.test(v);
+}
+
+export function counterTotalKey(kind: CounterKind, scope: CounterScope, id: string): string {
+  return `c:${kind}:${scope}:${id}`;
+}
+
+export function counterMonthKey(
+  kind: CounterKind,
+  scope: CounterScope,
+  id: string,
+  month: string,
+): string {
+  return `c:${kind}:${scope}:${id}:${month}`;
+}
+
+export function counterGuardKey(
+  kind: CounterKind,
+  ipHash: string,
+  scope: CounterScope,
+  id: string,
+): string {
+  return `cg:${kind}:${ipHash}:${scope}:${id}`;
+}

@@ -17,6 +17,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Stars } from "@/components/Brand";
 import { TerrainIcon } from "@/components/TerrainTags";
+import { PvPing } from "@/components/PvPing";
 import type { RaceListItem } from "@/types/content";
 import staticStyles from "../../static-pages.module.css";
 
@@ -47,6 +48,7 @@ export default async function OrganizerDetailPage({ params }: OrganizerDetailPag
 
   return (
     <div style={{ background: palette.bg, color: palette.ink, fontFamily: '"Noto Sans JP", sans-serif' }}>
+      <PvPing scope="organizer" id={organizer.id} />
       <SiteHeader palette={palette} displayFont={displayFont} variant="A" current="organizers" />
 
       <section className={staticStyles.heroSection}>

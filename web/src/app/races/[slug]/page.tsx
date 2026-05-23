@@ -17,6 +17,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RaceMeta } from "@/components/RaceMeta";
 import { RaceDetailChapters } from "@/components/RaceDetailChapters";
+import { PvPing } from "@/components/PvPing";
 import styles from "./page.module.css";
 
 export async function generateStaticParams() {
@@ -43,6 +44,7 @@ export default async function RaceDetailPage({ params }: RaceDetailPageProps) {
 
   return (
     <div style={{ background: palette.bg, color: palette.ink, fontFamily: '"Noto Sans JP", sans-serif' }}>
+      <PvPing scope="race" id={race.slug} />
       {/* フルブリードヒーロー */}
       <section className={styles.hero}>
         <div

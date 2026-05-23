@@ -3,18 +3,26 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import type { Palette, DisplayFont } from "./design-tokens";
 
+type Scope = "organizer" | "race" | "report";
+
 interface LikeResponse {
-  slug: string;
+  kind: "like";
+  scope: Scope;
+  id: string;
   total: number;
-  liked?: boolean;
+  counted?: boolean;
 }
 
-function localKey(slug: string, date: string) {
-  return `srhub:liked:${slug}:${date}`;
+function localKey(scope: Scope, id: string, date: string) {
+  return `srhub:liked:${scope}:${id}:${date}`;
 }
 
 function todayUtc(): string {
   return new Date().toISOString().slice(0, 10);
+}
+
+function apiUrl(scope: Scope, id: string) {
+  return `/api/counters/like/${encodeURIComponent(scope)}/${encodeURIComponent(id)}`;
 }
 
 const likedListeners = new Set<() => void>();
@@ -33,34 +41,34 @@ function notifyLiked() {
   likedListeners.forEach((l) => l());
 }
 
-function useLikedFromStorage(slug: string) {
+function useLikedFromStorage(scope: Scope, id: string) {
   return useSyncExternalStore(
     subscribeLiked,
-    () => localStorage.getItem(localKey(slug, todayUtc())) === "1",
+    () => localStorage.getItem(localKey(scope, id, todayUtc())) === "1",
     () => false,
   );
 }
 
 export function LikeButton({
-  slug,
+  scope,
+  id,
   palette,
   displayFont,
 }: {
-  slug: string;
+  scope: Scope;
+  id: string;
   palette: Palette;
   displayFont: DisplayFont;
 }) {
   const [total, setTotal] = useState<number | null>(null);
-  const liked = useLikedFromStorage(slug);
+  const liked = useLikedFromStorage(scope, id);
   const [pending, setPending] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
     (async () => {
       try {
-        const res = await fetch(`/api/likes/${encodeURIComponent(slug)}`, {
-          signal: controller.signal,
-        });
+        const res = await fetch(apiUrl(scope, id), { signal: controller.signal });
         if (!res.ok) return;
         const data = (await res.json()) as LikeResponse;
         setTotal(data.total);
@@ -69,19 +77,17 @@ export function LikeButton({
       }
     })();
     return () => controller.abort();
-  }, [slug]);
+  }, [scope, id]);
 
   const onClick = async () => {
     if (liked || pending) return;
     setPending(true);
     try {
-      const res = await fetch(`/api/likes/${encodeURIComponent(slug)}`, {
-        method: "POST",
-      });
+      const res = await fetch(apiUrl(scope, id), { method: "POST" });
       if (!res.ok) return;
       const data = (await res.json()) as LikeResponse;
       setTotal(data.total);
-      localStorage.setItem(localKey(slug, todayUtc()), "1");
+      localStorage.setItem(localKey(scope, id, todayUtc()), "1");
       notifyLiked();
     } catch {
       // ignore
