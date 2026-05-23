@@ -11,7 +11,7 @@ start_month: 9
 terrain:
   - 砂漠
   - 山岳
-difficulty: 5
+difficulty: 4
 support: self
 organizer: Canal Aventure
 official_url: https://www.canal-aventure.com/en/ultra-bolivia-race

@@ -10,7 +10,7 @@ duration_days: 5
 start_month: 9
 terrain:
   - その他
-difficulty: 5
+difficulty: 4
 support: self
 organizer: Beyond The Ultimate
 entry_fee:

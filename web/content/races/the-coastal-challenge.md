@@ -11,7 +11,7 @@ start_month: 2
 terrain:
   - ジャングル
   - 山岳
-difficulty: 4
+difficulty: 5
 support: full
 official_url: https://thecoastalchallengecostarica.com/
 hero_image: /images/races/the-coastal-challenge.jpg

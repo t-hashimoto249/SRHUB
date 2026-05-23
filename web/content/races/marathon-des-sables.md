@@ -10,7 +10,7 @@ duration_days: 7
 start_month: 4
 terrain:
   - 砂漠
-difficulty: 5
+difficulty: 4
 support: self
 organizer: Marathon des Sables
 official_url: https://www.marathondessables.com/en

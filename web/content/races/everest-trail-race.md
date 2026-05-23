@@ -10,7 +10,7 @@ duration_days: 13
 start_month: 11
 terrain:
   - 山岳
-difficulty: 5
+difficulty: 4
 support: full
 organizer: Grup Adeaventura
 official_url: http://www.everesttrailrace.com/en
