@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/organizers", priority: 0.7 },
     { path: "/races", priority: 0.9 },
     { path: "/reports", priority: 0.8 },
+    { path: "/videos", priority: 0.7 },
   ];
 
   const [races, reports, organizers] = await Promise.all([

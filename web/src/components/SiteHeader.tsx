@@ -9,7 +9,7 @@ import styles from "./SiteHeader.module.css";
 interface SiteHeaderProps {
   palette: Palette;
   displayFont: DisplayFont;
-  current?: "home" | "races" | "reports" | "organizers" | "partners" | "about" | "contact";
+  current?: "home" | "races" | "reports" | "videos" | "organizers" | "partners" | "about" | "contact";
   variant?: "A" | "B";
 }
 
@@ -17,6 +17,7 @@ const NAV = [
   { id: "home", label: "Home", href: "/" },
   { id: "races", label: "Races", href: "/races" },
   { id: "reports", label: "Reports", href: "/reports" },
+  { id: "videos", label: "Videos", href: "/videos" },
   { id: "organizers", label: "Organizers", href: "/organizers" },
   { id: "partners", label: "Partners", href: "/partners" },
   { id: "about", label: "About", href: "/about" },

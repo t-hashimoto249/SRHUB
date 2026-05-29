@@ -305,6 +305,12 @@ function ExploreSection({
       title: "All Reports",
       lead: "作成者・レース・目的・作成時期・開催月から、走った人のレポートを検索できます。",
     },
+    {
+      href: "/videos",
+      kicker: "Index 03",
+      title: "All Videos",
+      lead: "レース・大陸・開催月から、コースの雰囲気を伝える動画を探せます。",
+    },
   ];
   return (
     <section className={styles.exploreSection}>
