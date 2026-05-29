@@ -248,6 +248,12 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .exploreGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .exploreCard {
   position: relative;
   display: flex;

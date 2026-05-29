@@ -16,7 +16,8 @@ organizer: Grup Adeaventura
 official_url: http://www.everesttrailrace.com/en
 hero_image: /images/races/everest-trail-race.jpg
 summary: ヒマラヤ・エベレスト街道を舞台に、6ステージ170km・累積標高約26,000mを駆け抜ける高地ステージレース。
-videos: []
+videos:
+  - id: 3BnoWzNYXBk
 ---
 
 ネパール・ヒマラヤのエベレスト街道（クーンブ地方）を舞台にしたステージレース。距離は170kmと一見短いが、累積標高は約26,000mに及び、最高地点は4,000m超。標高に対する適応と高所での運動能力が完走を左右する、高地特有の過酷さを持つレース。

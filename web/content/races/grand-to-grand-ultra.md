@@ -16,7 +16,8 @@ organizer: Tess and Colin Geddes
 official_url: https://g2gultra.com/
 hero_image: /images/races/grand-to-grand-ultra.png
 summary: アメリカ・グランドキャニオン北縁から始まる、6ステージ275kmのセルフサポート式ステージレース。コロラド高原の高地砂漠を縦断する。
-videos: []
+videos:
+  - id: yOBBioYkHeQ
 ---
 
 アメリカ・アリゾナ／ユタ州のコロラド高原を舞台に、グランドキャニオン北縁を起点として6ステージ275kmで走破するセルフサポート式ステージレース。標高1,524〜2,652mの高地砂漠を、装備と食料を背負って縦断する。

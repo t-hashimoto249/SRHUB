@@ -16,7 +16,8 @@ organizer: Marathon des Sables
 official_url: https://www.marathondessables.com/en
 hero_image: /images/races/marathon-des-sables.jpg
 summary: モロッコ・サハラ砂漠を6ステージ約250kmで走破する、世界で最も有名なセルフサポート式ステージレース。
-videos: []
+videos:
+  - id: Mbjecjlc4S0
 ---
 
 モロッコ南部・サハラ砂漠を舞台に、約250kmを6ステージで走破するセルフサポート方式のステージレース。1986年に始まり、装備と数日分の食料を背負って砂丘・岩場・乾いたワジを駆け抜ける、ステージレースの代名詞的存在として知られる。

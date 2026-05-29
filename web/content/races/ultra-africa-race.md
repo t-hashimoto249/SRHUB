@@ -46,7 +46,9 @@ entry_flow: |
   2. パスポートのコピーを提出
   3. 救援保険の証明書を提出
   4. デポジット（手付金）を支払い
-videos: []
+videos:
+  - id: qnGGkKGB8TU
+  - id: CxSwXHLCxaQ
 editions:
   - year: 2021
     country: モザンビーク

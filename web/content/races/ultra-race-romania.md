@@ -16,7 +16,8 @@ organizer: Legendary Sports
 official_url: https://ultraraceromania.ro/
 hero_image: /images/races/ultra-race-romania.jpg
 summary: ルーマニアの手つかずの山岳ウィルダネスを舞台に、6ステージ250kmをセルフサポートで走破するヨーロッパのステージレース。
-videos: []
+videos:
+  - id: lHSrRb0EQso
 ---
 
 ルーマニアの広大な原生林と山岳地帯を、6ステージ250kmにわたってセルフサポート方式で走破するステージレース。中欧らしい深い森、稜線歩き、変わりやすい天候が特徴で、地形と気象の両面で柔軟な対応力が求められる。
