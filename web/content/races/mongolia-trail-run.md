@@ -31,7 +31,8 @@ schedule:
     description: 遊牧民の冬季拠点 〜 ハラホリン
   - day: 6
     description: ハラホリン 〜 カラコルム
-videos: []
+videos:
+  - id: 7buDZ4GrHdM
 ---
 
 モンゴル中央部、エルセン・タサルハイ砂丘から古都カラコルムまでを6ステージで巡るトレイル・ステージレース。Khan（170km）とNomad（90km）の2部門が用意されている。

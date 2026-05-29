@@ -17,7 +17,8 @@ participants_approx: 120
 official_url: https://trans-sahara-marathon.com/
 hero_image: /images/races/trans-sahara-marathon.jpg
 summary: モロッコ・エルグ・シェガガ砂漠を舞台に、4ステージ138kmをフルサポートで走るアクセシブルな砂漠ステージレース。80km・200kmノンストップ部門も併設。
-videos: []
+videos:
+  - id: SSwMPfAnWfM
 ---
 
 モロッコ南部の砂丘地帯エルグ・シェガガを起点に、4ステージ138kmで走破するフルサポート方式のステージレース。MDS優勝経験を持つモハマド・アハンサル氏とフランスのアウトドアブランド Raidlight 創業者ベノワ・ラヴァル氏が共同で運営する。
