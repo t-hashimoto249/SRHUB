@@ -5,28 +5,52 @@
 .navInner {
   display: flex;
   gap: 0;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .navButton {
-  padding: 16px 18px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 14px 6px;
   border: none;
   background: transparent;
   font-weight: 500;
   font-size: 12px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  justify-content: center;
+  gap: 6px;
   white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .navButton {
+    overflow: visible;
+  }
+}
+
+/* The decorative chapter number is dropped on mobile so the four labels
+   fit their quarter-width buttons without overflowing into each other. */
+.navNum {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .navNum {
+    display: inline;
+  }
+}
+
+@media (min-width: 768px) {
+  .navButton {
+    flex: 0 0 auto;
+    justify-content: flex-start;
     padding: 20px 24px;
     font-size: 13px;
+    letter-spacing: 0.08em;
+    gap: 8px;
   }
 }
 
@@ -58,6 +82,18 @@
 }
 
 /* Overview */
+.overviewSections {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+@media (min-width: 768px) {
+  .overviewSections {
+    gap: 72px;
+  }
+}
+
 .overviewGrid {
   display: grid;
   grid-template-columns: 1fr;

@@ -23,6 +23,7 @@ export const COUNTRY_COORDS: Record<string, [number, number]> = {
   ナミビア: [-23.0, 15.0],
   ニュージーランド: [-45.0, 168.7],
   チリ: [-22.9, -68.2],
+  南極: [-64.5, -62.5],
 };
 
 export function resolveCoords(
