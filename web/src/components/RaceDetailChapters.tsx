@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import type { Race, Report } from "@/types/content";
 import { MONTH_LABELS, type Palette, type DisplayFont } from "./design-tokens";
 import { Stars } from "./Brand";
 import { ReportPurposeTabs } from "./ReportPurposeTabs";
 import styles from "./RaceDetailChapters.module.css";
 
-type SectionId = "overview" | "schedule" | "gear" | "entry" | "reports" | "videos";
+type SectionId = "overview" | "entry" | "reports" | "videos";
 
 export function RaceDetailChapters({
   race,
@@ -26,11 +26,9 @@ export function RaceDetailChapters({
   const [section, setSection] = useState<SectionId>("overview");
   const sections: { id: SectionId; label: string; n: string; available: boolean }[] = [
     { id: "overview", label: "Overview", n: "01", available: true },
-    { id: "schedule", label: "Schedule", n: "02", available: !!race.schedule?.length },
-    { id: "gear", label: "Gear", n: "03", available: !!race.gear?.length },
+    { id: "videos", label: "Video", n: "02", available: !!race.videos?.length },
+    { id: "reports", label: "Report", n: "03", available: true },
     { id: "entry", label: "Entry", n: "04", available: !!race.entry_flow },
-    { id: "reports", label: "Reports", n: "05", available: true },
-    { id: "videos", label: "Videos", n: "06", available: !!race.videos?.length },
   ];
 
   return (
@@ -64,6 +62,7 @@ export function RaceDetailChapters({
                 }}
               >
                 <span
+                  className={styles.navNum}
                   style={{
                     fontFamily: "ui-monospace, monospace",
                     fontSize: 10,
@@ -82,15 +81,31 @@ export function RaceDetailChapters({
 
       <section className={styles.section}>
         {section === "overview" && (
-          <ChapterOverview
-            race={race}
-            palette={palette}
-            displayFont={displayFont}
-            organizerId={organizerId}
-          />
+          <div className={styles.overviewSections}>
+            <ChapterOverview
+              race={race}
+              palette={palette}
+              displayFont={displayFont}
+              organizerId={organizerId}
+            />
+            {race.schedule?.length ? (
+              <div>
+                <SectionHeading palette={palette} displayFont={displayFont}>
+                  Schedule
+                </SectionHeading>
+                <ChapterSchedule race={race} palette={palette} displayFont={displayFont} />
+              </div>
+            ) : null}
+            {race.gear?.length ? (
+              <div>
+                <SectionHeading palette={palette} displayFont={displayFont}>
+                  Gear
+                </SectionHeading>
+                <ChapterGear race={race} palette={palette} displayFont={displayFont} />
+              </div>
+            ) : null}
+          </div>
         )}
-        {section === "schedule" && <ChapterSchedule race={race} palette={palette} displayFont={displayFont} />}
-        {section === "gear" && <ChapterGear race={race} palette={palette} displayFont={displayFont} />}
         {section === "entry" && <ChapterEntry race={race} palette={palette} displayFont={displayFont} />}
         {section === "reports" && (
           <ReportPurposeTabs reports={reports} palette={palette} displayFont={displayFont} />
@@ -98,6 +113,33 @@ export function RaceDetailChapters({
         {section === "videos" && <ChapterVideos race={race} palette={palette} />}
       </section>
     </>
+  );
+}
+
+function SectionHeading({
+  children,
+  palette,
+  displayFont,
+}: {
+  children: ReactNode;
+  palette: Palette;
+  displayFont: DisplayFont;
+}) {
+  return (
+    <h3
+      style={{
+        fontFamily: displayFont.stack,
+        fontSize: 22,
+        fontWeight: 600,
+        margin: "0 0 28px",
+        paddingBottom: 12,
+        borderBottom: `1px solid ${palette.rule}`,
+        color: palette.ink,
+        letterSpacing: "0.02em",
+      }}
+    >
+      {children}
+    </h3>
   );
 }
 
